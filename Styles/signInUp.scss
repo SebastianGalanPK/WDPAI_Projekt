@@ -17,6 +17,8 @@ body{
     width: 100vw;
     height: 100vh;
 
+    min-width: 300px !important;
+
     display: flex;
 
     .panel-left{
@@ -117,9 +119,10 @@ body{
         margin: auto;
         text-align: right;
         position: relative;
-        top: -80px;
         right: -90px;
+        top: -80px;
         font-family: 'Koulen', cursive;
+        letter-spacing: 10px;
 
         #daily-dose-of{
             font-size: 9em;
@@ -138,4 +141,252 @@ body{
 .link:hover{
     cursor: pointer;
     font-size: +20px;
+}
+
+@media screen and (max-width: 1700px) {
+    .container{
+        .panel-left{
+            .form-container{
+                .button-container{
+                    button.sign-in{
+                        width: 50%;
+                        font-size: 130%;
+                    }
+                    button.sign-up{
+
+                        font-size: 130%;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1400px) {
+    .container{
+        .panel-left{
+            .form-container{
+                form{
+                    .forgot-password{
+                        font-size: 1em;
+                    }
+                }
+
+                input{
+                    width: 250px;
+                }
+                .button-container{
+                    button.sign-in{
+                        width: 50%;
+                        font-size: 100%;
+                    }
+                    button.sign-up{
+
+                        font-size: 100%;
+                    }
+                }
+            }
+        }
+        .panel-right{
+            right: -30px;
+
+            #daily-dose-of{
+                font-size: 6em;
+            }
+    
+            .meemes{
+                font-size: 8em;
+                top: -100px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .container{
+        .panel-left{
+            .header{
+                width: 70%;
+    
+                #welcome-to{
+                    font-size: 2.5em;
+                }
+    
+                #meeme{
+                    font-size: 5em;
+                }
+            }
+        }
+        .panel-right{
+            right: 0;
+            letter-spacing: 5px;
+
+            #daily-dose-of{
+                font-size: 6em;
+            }
+    
+            .meemes{
+                font-size: 8em;
+                top: -100px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .container{
+        .panel-right{
+            letter-spacing: 2px;
+
+            #daily-dose-of{
+                font-size: 5em;
+            }
+    
+            .meemes{
+                font-size: 7em;
+                top: -80px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container{
+        .panel-right{
+            letter-spacing: 0;
+
+            #daily-dose-of{
+                font-size: 4em;
+            }
+    
+            .meemes{
+                font-size: 6em;
+                top: -60px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container{
+        .panel-right{
+            display: none;
+        }
+
+        .panel-left{
+            width: 100vw;
+    
+            .header{
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+    
+            .form-container{
+                form{
+                    width: 60%;
+                    margin-left: auto;
+                    margin-right: auto;
+
+                    .form-title{
+                        font-size: 1.5em;
+                    }
+                }
+    
+                input {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container{
+        .panel-right{
+            display: none;
+        }
+
+        .panel-left{
+            width: 100vw;
+    
+            .header{
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+
+                #welcome-to{
+                    font-size: 2em;
+                }
+    
+                #meeme{
+                    font-size: 4em;
+                }
+            }
+    
+            .form-container{
+                padding-left: 40px;
+                padding-right: 40px;
+
+                form{
+                    width: 80%;
+                    margin-left: auto;
+                    margin-right: auto;
+
+                    .form-title{
+                        font-size: 1.5em;
+                    }
+                }
+    
+                input {
+                    width: 90%;
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .container{
+        .panel-right{
+            display: none;
+        }
+
+        .panel-left{
+            width: 100vw;
+    
+            .header{
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+
+                #welcome-to{
+                    font-size: 2em;
+                }
+    
+                #meeme{
+                    font-size: 4em;
+                }
+            }
+    
+            .form-container{
+                padding-left: 20px;
+                padding-right: 20px;
+
+                form{
+                    width: 90%;
+                    padding: 0;
+
+                    .form-title{
+                        font-size: 1.5em;
+                    }
+                }
+    
+                input {
+                    width: 100%;
+                    font-size: 1em;
+                }
+            }
+        }
+    }
 }

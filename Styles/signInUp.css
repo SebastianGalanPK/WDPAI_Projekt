@@ -9,6 +9,7 @@ body {
 .container {
   width: 100vw;
   height: 100vh;
+  min-width: 300px !important;
   display: flex;
 }
 .container .panel-left {
@@ -94,9 +95,10 @@ body {
   margin: auto;
   text-align: right;
   position: relative;
-  top: -80px;
   right: -90px;
+  top: -80px;
   font-family: "Koulen", cursive;
+  letter-spacing: 10px;
 }
 .container .panel-right #daily-dose-of {
   font-size: 9em;
@@ -112,4 +114,178 @@ body {
 .link:hover {
   cursor: pointer;
   font-size: 20px;
+}
+
+@media screen and (max-width: 1700px) {
+  .container .panel-left .form-container .button-container button.sign-in {
+    width: 50%;
+    font-size: 130%;
+  }
+  .container .panel-left .form-container .button-container button.sign-up {
+    font-size: 130%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .container .panel-left .form-container form .forgot-password {
+    font-size: 1em;
+  }
+  .container .panel-left .form-container input {
+    width: 250px;
+  }
+  .container .panel-left .form-container .button-container button.sign-in {
+    width: 50%;
+    font-size: 100%;
+  }
+  .container .panel-left .form-container .button-container button.sign-up {
+    font-size: 100%;
+  }
+  .container .panel-right {
+    right: -30px;
+  }
+  .container .panel-right #daily-dose-of {
+    font-size: 6em;
+  }
+  .container .panel-right .meemes {
+    font-size: 8em;
+    top: -100px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .container .panel-left .header {
+    width: 70%;
+  }
+  .container .panel-left .header #welcome-to {
+    font-size: 2.5em;
+  }
+  .container .panel-left .header #meeme {
+    font-size: 5em;
+  }
+  .container .panel-right {
+    right: 0;
+    letter-spacing: 5px;
+  }
+  .container .panel-right #daily-dose-of {
+    font-size: 6em;
+  }
+  .container .panel-right .meemes {
+    font-size: 8em;
+    top: -100px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .container .panel-right {
+    letter-spacing: 2px;
+  }
+  .container .panel-right #daily-dose-of {
+    font-size: 5em;
+  }
+  .container .panel-right .meemes {
+    font-size: 7em;
+    top: -80px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .container .panel-right {
+    letter-spacing: 0;
+  }
+  .container .panel-right #daily-dose-of {
+    font-size: 4em;
+  }
+  .container .panel-right .meemes {
+    font-size: 6em;
+    top: -60px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .container .panel-right {
+    display: none;
+  }
+  .container .panel-left {
+    width: 100vw;
+  }
+  .container .panel-left .header {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container .panel-left .form-container form {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container .panel-left .form-container form .form-title {
+    font-size: 1.5em;
+  }
+  .container .panel-left .form-container input {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .container .panel-right {
+    display: none;
+  }
+  .container .panel-left {
+    width: 100vw;
+  }
+  .container .panel-left .header {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container .panel-left .header #welcome-to {
+    font-size: 2em;
+  }
+  .container .panel-left .header #meeme {
+    font-size: 4em;
+  }
+  .container .panel-left .form-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .container .panel-left .form-container form {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container .panel-left .form-container form .form-title {
+    font-size: 1.5em;
+  }
+  .container .panel-left .form-container input {
+    width: 90%;
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 470px) {
+  .container .panel-right {
+    display: none;
+  }
+  .container .panel-left {
+    width: 100vw;
+  }
+  .container .panel-left .header {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .container .panel-left .header #welcome-to {
+    font-size: 2em;
+  }
+  .container .panel-left .header #meeme {
+    font-size: 4em;
+  }
+  .container .panel-left .form-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .container .panel-left .form-container form {
+    width: 90%;
+    padding: 0;
+  }
+  .container .panel-left .form-container form .form-title {
+    font-size: 1.5em;
+  }
+  .container .panel-left .form-container input {
+    width: 100%;
+    font-size: 1em;
+  }
 }/*# sourceMappingURL=signInUp.css.map */
