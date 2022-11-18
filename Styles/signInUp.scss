@@ -1,0 +1,141 @@
+$bgColor: #171717;
+$gray1: #616161;
+$color1: #ffc03b;
+$color2: #ff7646;
+$color-link: #4690FB;
+$color-font: #1F1F1F;
+
+body{
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+    font-family: 'Inter', sans-serif;
+    color: $color-font;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+
+    .panel-left{
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.7);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .header{
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px #17171760;
+
+            #welcome-to{
+                font-size: 3em;
+            }
+
+            #meeme{
+                font-size: 6em;
+            }
+        }
+
+        .form-container{
+            padding-left: 80px;
+            padding-right: 80px;
+
+            form{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .form-title{
+                    margin-right: auto;
+                    font-size: 2em;
+                    font-weight: 800;
+                    text-shadow: 0 2px #17171760;
+                }
+
+                .forgot-password{
+                    margin-left: auto;
+                    margin-top: 5px;
+                    font-size: 1.3em;
+                    color: $color-link;
+                    font-weight: 800;
+                    text-shadow: 0 2px #17171760;
+                }
+            }
+
+            input {
+                width: 20vw;
+                font-size: 1.5em;
+                font-weight: lighter;
+                padding: 15px 20px;
+                margin-top: 20px;
+                border-radius: 12px;
+                border: 3px solid $color2;
+                outline: none !important;
+            }
+
+            input[type=text]:focus {
+                background-color: rgb(238, 238, 238);
+            }
+
+            .button-container{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 100px;
+
+                button.sign-in{
+                    background-color: black;
+                    width: 200px;
+                    padding: 15px;
+                    border-radius: 10px;
+                    color: white;
+                    font-size: 2em;
+                }
+
+                button.sign-up{
+                    text-align: right;
+                    color: $color-link;
+                    background: none;
+                    border: none;
+                    font-size: 1.5em;
+                    font-weight: 800;
+                    text-shadow: 0 2px #17171760;
+                }
+            }
+            
+        }
+    }
+
+    .panel-right{
+        margin: auto;
+        text-align: right;
+        position: relative;
+        top: -80px;
+        right: -90px;
+        font-family: 'Koulen', cursive;
+
+        #daily-dose-of{
+            font-size: 9em;
+            font-weight: 400;
+        }
+
+        .meemes{
+            font-size: 11em;
+            font-weight: 800;
+            position: relative;
+            top: -120px
+        }
+    }
+}
+
+.link:hover{
+    cursor: pointer;
+    font-size: +20px;
+}
