@@ -12,32 +12,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="container">
-        <div id="panel-left">
-            <div id="left">
-                <div id="website-logo">
-                    <a href="signIn.php"><img src = Images/logo150x29.png></a>
-                </div>
-            </div>
-            <div id="right">
-                <div id="search-bar">
-                    <span class="search">Search</span>
-                </div>
-            </div>
-        </div>
-        <div id="panel-middle">
+    <div class="container">
+        <div class="left-panel">
             <div class="header">
-                <span id="community-name">
-                    Home
-                </span>
+                <div class="logo">
+                    <a href="index.php"><img src="Images/logo150x29.png"></a>
+                </div>
+                <form>
+                    <input name="search-value" type="Text" placeholder="Search">
+                </form>
             </div>
         </div>
-        <div id="panel-right">
-            <div id="sign-in-button" class="button">
-                Sign In
+        <div class="middle-panel">
+            <div class="header">
+                <span class="community-name">Home</span>
             </div>
-            <div id="sign-up-button" class="button">
-                Sign Up
+        </div>
+        <div class="right-panel">
+            <div class="button-container">
+                <div class="button sign-in">
+                    Sign In
+                </div>
+                <div class="button sign-up">
+                    Sign Up
+                </div>
             </div>
         </div>
     </div>

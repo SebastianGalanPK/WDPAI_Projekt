@@ -117,12 +117,22 @@ body {
 }
 
 @media screen and (max-width: 1700px) {
+  .container .panel-right {
+    right: -30px;
+  }
+  .container .panel-right #daily-dose-of {
+    font-size: 7em;
+  }
+  .container .panel-right .meemes {
+    font-size: 9em;
+    top: -100px;
+  }
   .container .panel-left .form-container .button-container button.sign-in {
     width: 50%;
     font-size: 130%;
   }
   .container .panel-left .form-container .button-container button.sign-up {
-    font-size: 130%;
+    font-size: 120%;
   }
 }
 @media screen and (max-width: 1400px) {
@@ -218,6 +228,13 @@ body {
   }
   .container .panel-left .form-container input {
     width: 90%;
+  }
+  .container .panel-left .form-container .button-container button.sign-in {
+    width: 50%;
+    font-size: 90%;
+  }
+  .container .panel-left .form-container .button-container button.sign-up {
+    font-size: 90%;
   }
 }
 @media screen and (max-width: 600px) {

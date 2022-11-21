@@ -16,91 +16,94 @@ a{
     color: inherit;
 }
 
-#container{
-    min-width: 1500px;
-}
+.container{
+    width: 100vw;
+    height: 100vh;
 
-#panel-left{
-    width: calc((100% - 800px)/2 - 2px);
-    min-width: 300px;
-    float: left;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 
-    #left{
-        width: 200px;
-        float: left;
-        margin-top: 25px;
+    .left-panel{
+        width: 30vw;
 
-        #website-logo{
-            height: auto;
+        .logo{
             margin-left: 25px;
-            margin-right: 25px;
-            margin-top: 3px;
         }
-    }
-    #right{
-        width: calc(100% - 230px);
-        max-width: 500px;
-        float: left;
-        margin-top: 25px;
 
-        #search-bar{
-            border: 1px solid $gray1;
-            border-radius: 15px;
-            height: 35px;
-            
-            .search{
-                line-height: 35px;
-                color: $gray1;
-                margin-left: 25px;
+        .header{
+            display: flex;
+            flex-direction: row;
+            padding: 25px 0;
+
+            form{
+                margin: 0 25px;
+                width: 100%;
+            }
+
+            input{
+                border: 1px solid #616161;
+                background-color: #171717;
+                color: #616161;
+                border-radius: 15px;
+                width: 100%;
+                line-height: 30px;
+            }
+
+            input::placeholder{
+                padding-left: 25px;
+                text-overflow: ellipsis;
             }
         }
     }
-}
-#panel-middle{
-    width: 800px;
-    border-left: 1px solid $gray1;
-    border-right: 1px solid $gray1;
-    min-height: 100vh;
-    float: left;
 
-    .header{
-        width: 100%;
-        height: 75px;
-        border-bottom: 1px solid $gray1;
+    .middle-panel{
+        width: 800px;
+        border-right: 1px solid #616161;
+        border-left: 1px solid #616161;
 
-        #community-name{
-            margin-left: 20px;
-            line-height: 75px;
+        .header{
+            width: 100%;
+            font-size: 2em;
             font-weight: 800;
-            font-size: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid #616161;
+
+            .community-name{
+                margin-left: 50px;
+            }
         }
     }
-}
-#panel-right{
-    width: calc((100% - 800px)/2 - 2px);
-    min-width: 300px;
-    float: left;
-    padding: 20px 0 20px 0;
 
-    .button{
-        width: 120px;
-        height: 40px;
-        border: 2px solid white;
-        border-radius: 15px;
-        line-height: 40px;
-        text-align: center;
-        font-weight: 800;
-        font-size: 22px;
-        float: right;
-        margin-right: 25px;
-    }
+    .right-panel{
+        width: 30vw;
 
-    .button:hover{
-        cursor: pointer;
-        font-size: 23px;
-    }
+        .button-container{
+            display: flex;
+            justify-content: end;
+            
+            .button{
+                border-radius: 15px;
+                padding: 8px 20px;
+                font-size: 1.5em;
+                font-weight: 800;
+                margin-top: 25px;
+            }
 
-    #sign-up-button{
-        background: linear-gradient(-180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+            .button:hover{
+                cursor: pointer;
+            }
+
+            .sign-in{
+                border: 2px solid #616161;
+                margin-right: 25px;
+            }
+
+            .sign-up{
+                margin-right: 25px;
+                border: 2px solid #ffffff;
+                background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+            }
+        }
     }
 }
