@@ -13,7 +13,7 @@ a {
 
 .container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -55,6 +55,7 @@ a {
 }
 .container .middle-panel {
   width: 800px;
+  min-height: 100vh;
   border-right: 1px solid #616161;
   border-left: 1px solid #616161;
 }
@@ -67,6 +68,75 @@ a {
 }
 .container .middle-panel .header .community-name {
   margin-left: 50px;
+}
+.container .middle-panel .meme-container {
+  width: 100%;
+  border-bottom: 1px solid #616161;
+}
+.container .middle-panel .meme-container .meme-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 50px;
+  font-weight: normal;
+  margin: 0 25px;
+  padding: 10px 0;
+}
+.container .middle-panel .meme-container .meme-header .user-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.container .middle-panel .meme-container .meme-header .user-info .user-logo {
+  font-size: 2em;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  text-align: center;
+}
+.container .middle-panel .meme-container .meme-header .user-info .user-name {
+  font-size: 1em;
+  padding-left: 10px;
+}
+.container .middle-panel .meme-container .meme-header .community-name {
+  font-size: 1em;
+}
+.container .middle-panel .meme-container .meme-image {
+  width: 95%;
+  margin: auto;
+  height: 450px;
+  background-color: #d49d35;
+}
+.container .middle-panel .meme-container .meme-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+.container .middle-panel .meme-container .meme-bottom button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 2em;
+  color: #616161;
+}
+.container .middle-panel .meme-container .meme-bottom .vote-panel {
+  margin-left: 20px;
+}
+.container .middle-panel .meme-container .meme-bottom .vote-panel .vote-amount {
+  font-size: 1.2em;
+  color: #616161;
+  font-weight: 800;
+  line-height: 25px;
+  position: relative;
+  top: -6px;
+}
+.container .middle-panel .meme-container .meme-bottom .meme-bottom-right {
+  margin-right: 20px;
+}
+.container .middle-panel .meme-container .meme-bottom .meme-bottom-right .trash-bin {
+  display: none;
 }
 .container .right-panel {
   width: 30vw;

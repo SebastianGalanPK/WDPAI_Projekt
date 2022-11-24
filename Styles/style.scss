@@ -18,7 +18,7 @@ a{
 
 .container{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 
     display: flex;
     justify-content: space-between;
@@ -42,9 +42,9 @@ a{
             }
 
             input{
-                border: 1px solid #616161;
+                border: 1px solid $gray1;
                 background-color: #171717;
-                color: #616161;
+                color: $gray1;
                 border-radius: 15px;
                 width: 100%;
                 line-height: 30px;
@@ -59,18 +59,103 @@ a{
 
     .middle-panel{
         width: 800px;
-        border-right: 1px solid #616161;
-        border-left: 1px solid #616161;
+        min-height: 100vh;
+        border-right: 1px solid $gray1;
+        border-left: 1px solid $gray1;
 
         .header{
             width: 100%;
             font-size: 2em;
             font-weight: 800;
             padding: 25px 0;
-            border-bottom: 1px solid #616161;
+            border-bottom: 1px solid $gray1;
 
             .community-name{
                 margin-left: 50px;
+            }
+        }
+
+        .meme-container{
+            width: 100%;
+            border-bottom: 1px solid $gray1;
+
+            .meme-header{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                
+                line-height: 50px;
+                font-weight: normal;
+                margin: 0 25px;
+                padding: 10px 0;
+
+                .user-info{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+
+                    .user-logo{
+                        font-size: 2em;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 5px;
+                        text-align: center;
+                    }
+    
+                    .user-name{
+                        font-size: 1em;
+                        padding-left: 10px;
+                    }
+                }
+
+                .community-name{
+                    font-size: 1em;
+                }
+            }
+            
+            .meme-image{
+                width: 95%;
+                margin: auto;
+                height: 450px;
+                background-color: #d49d35;
+            }
+
+            .meme-bottom{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 5px 0;
+                
+
+                button{
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    font-size: 2em;
+                    color: $gray1;
+                }
+
+                .vote-panel{
+                    margin-left: 20px;
+
+                    .vote-amount{
+                        font-size: 1.2em;
+                        color: $gray1;
+                        font-weight: 800;
+                        line-height: 25px;
+                        position: relative;
+                        top: -6px;
+                    }
+                }
+
+                .meme-bottom-right{
+                    margin-right: 20px;
+
+                    .trash-bin{
+                        display: none;
+                    }
+                }
             }
         }
     }
