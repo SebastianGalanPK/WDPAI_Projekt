@@ -26,19 +26,27 @@ a{
 
     .left-panel{
         width: 30vw;
+        display: flex;
+        flex-direction: row;
+        padding: 25px 0;
 
-        .logo{
-            margin-left: 25px;
+        .left-panel-left{
+
+            .logo{
+                margin-left: 25px;
+            }
         }
 
-        .header{
-            display: flex;
-            flex-direction: row;
-            padding: 25px 0;
+        .left-panel-right{
+            width: 300px;
+            margin-left: auto;
+            height: 100vh;
+            position: sticky;
+            top: 25px;
 
             form{
-                margin: 0 25px;
-                width: 100%;
+                width: 90%;
+                margin: auto;
             }
 
             input{
@@ -53,6 +61,41 @@ a{
             input::placeholder{
                 padding-left: 25px;
                 text-overflow: ellipsis;
+            }
+
+            .nav-left{
+                width: 100%;
+                margin-top: 50px;
+                overflow: scroll;
+                height: 100%;
+
+                .button{
+                    padding: 10px;
+                    font-weight: 800;
+                    line-height: 100%;
+
+                    display: flex;
+                    flex-direction: row;
+
+                    .icon{
+                        font-size: 3em;
+                    }
+                    .name{
+                        margin-left: 20px;
+                        font-size: 1.5em;
+                        line-height: 40px;
+                    }
+                }
+
+                .button-new-meme{
+                    border: 2px solid white;
+                    border-radius: 25px;
+                    background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+                    padding: 25px 0;
+                    text-align: center;
+                    font-size: 1.5em;
+                    font-weight: 800;
+                }
             }
         }
     }
@@ -87,7 +130,7 @@ a{
                 line-height: 50px;
                 font-weight: normal;
                 margin: 0 25px;
-                padding: 10px 0;
+                padding: 5px 0;
 
                 .user-info{
                     width: 100%;
@@ -113,11 +156,17 @@ a{
                 }
             }
             
+            .meme-text{
+                padding: 0 20px 10px 20px;
+                text-align: justify;
+            }
+
             .meme-image{
                 width: 95%;
                 margin: auto;
                 height: 450px;
                 background-color: #d49d35;
+                border-radius: 5px;
             }
 
             .meme-bottom{

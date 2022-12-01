@@ -17,13 +17,46 @@
 <body>
     <div class="container">
         <div class="left-panel">
-            <div class="header">
+            <div class="left-panel-left">
                 <div class="logo">
                     <a href="index.php"><img src="Images/logo150x29.png"></a>
                 </div>
+            </div>
+            <div class="left-panel-right">
                 <form>
                     <input name="search-value" type="Text" placeholder="Search">
                 </form>
+
+                <div class="nav-left">
+                    <div class="button">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="name">
+                            Favourite
+                        </div>
+                    </div>
+                    <div class="button">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="name">
+                            Favourite
+                        </div>
+                    </div>
+                    <div class="button">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="name">
+                            Favourite
+                        </div>
+                    </div>
+
+                    <div class="button-new-meme">
+                        Post a new meme
+                    </div>
+                </div>
             </div>
         </div>
         <div class="middle-panel">
@@ -44,6 +77,100 @@
                     <div class="community-name">
                         @Poland 
                     </div>
+                </div>
+                <div class="meme-image">
+
+                </div>
+                <div class="meme-bottom">
+                    <div class="vote-panel">
+                        <button><i class="fa-solid fa-square-caret-up"></i></button>
+                        <button><i class="fa-solid fa-square-caret-down"></i></button>
+                        <span class="vote-amount">2521</span>
+                    </div>
+                    <div class="meme-bottom-right">
+                        <button><i class="fa-solid fa-star"></i></button>
+                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="meme-container">
+                <div class="meme-header">
+                    <div class="user-info">
+                        <div class="user-logo">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="user-name">
+                            UserName224
+                        </div>
+                    </div>
+                    <div class="community-name">
+                        @Poland 
+                    </div>
+                </div>
+                <div class="meme-text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                </div>
+                <div class="meme-image">
+
+                </div>
+                <div class="meme-bottom">
+                    <div class="vote-panel">
+                        <button><i class="fa-solid fa-square-caret-up"></i></button>
+                        <button><i class="fa-solid fa-square-caret-down"></i></button>
+                        <span class="vote-amount">2521</span>
+                    </div>
+                    <div class="meme-bottom-right">
+                        <button><i class="fa-solid fa-star"></i></button>
+                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meme-container">
+                <div class="meme-header">
+                    <div class="user-info">
+                        <div class="user-logo">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="user-name">
+                            UserName224
+                        </div>
+                    </div>
+                    <div class="community-name">
+                        @Poland 
+                    </div>
+                </div>
+                <div class="meme-image">
+
+                </div>
+                <div class="meme-bottom">
+                    <div class="vote-panel">
+                        <button><i class="fa-solid fa-square-caret-up"></i></button>
+                        <button><i class="fa-solid fa-square-caret-down"></i></button>
+                        <span class="vote-amount">2521</span>
+                    </div>
+                    <div class="meme-bottom-right">
+                        <button><i class="fa-solid fa-star"></i></button>
+                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="meme-container">
+                <div class="meme-header">
+                    <div class="user-info">
+                        <div class="user-logo">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </div>
+                        <div class="user-name">
+                            UserName224
+                        </div>
+                    </div>
+                    <div class="community-name">
+                        @Poland 
+                    </div>
+                </div>
+                <div class="meme-text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                 </div>
                 <div class="meme-image">
 
