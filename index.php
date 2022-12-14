@@ -16,187 +16,238 @@
 </head>
 <body>
     <div class="container">
-        <div class="left-panel">
-            <div class="left-panel-left">
-                <div class="logo">
-                    <a href="index.php"><img src="Images/logo150x29.png"></a>
-                </div>
+        <div class="panel-left">
+            <div class="panel-left-left">
+                <img src="Images/logo150x29.png">
             </div>
-            <div class="left-panel-right">
+            <div class="panel-left-right">
                 <form>
-                    <input name="search-value" type="Text" placeholder="Search">
+                    <input type="text" placeholder="Search">
                 </form>
 
-                <div class="nav-left">
+                <div class="nav-main">
                     <div class="button">
-                        <div class="icon">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="name">
-                            Favourite
-                        </div>
+                        <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="name">Favourite</div>
                     </div>
                     <div class="button">
-                        <div class="icon">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="name">
-                            Favourite
-                        </div>
+                        <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="name">Favourite</div>
                     </div>
                     <div class="button">
-                        <div class="icon">
-                            <i class="fa-solid fa-circle-user"></i>
+                        <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="name">Favourite</div>
+                    </div>
+                    <div class="button">
+                        <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="name">Favourite</div>
+                    </div>
+                </div>
+
+                <div class="nav-user">
+                    <div class="header">
+                        Your community
+                    </div>
+
+                    <div class="community-list">
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
                         </div>
-                        <div class="name">
-                            Favourite
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
+                        </div>
+
+                        <div class="button">
+                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                            <div class="name">Favourite</div>
                         </div>
                     </div>
 
-                    <div class="button-new-meme">
+                </div>
+
+                <div class="post-new-meme">
                         Post a new meme
-                    </div>
+                </div>
+
+                <div class="button-down">
+                    <a href="signIn.php">
+                        <div class="button sign-in">
+                            Sign In
+                        </div>
+                    </a>
+
+                    <a href="signUp.php">
+                        <div class="button sign-up">
+                            Sign Up
+                        </div>
+                    </a>
                 </div>
             </div>
+
+
         </div>
-        <div class="middle-panel">
+        <div class="panel-center">
             <div class="header">
-                <span class="community-name">Home</span>
+                <div id="menu-button">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                
+                <span id="community-name">Home</span>
             </div>
 
             <div class="meme-container">
                 <div class="meme-header">
-                    <div class="user-info">
-                        <div class="user-logo">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="user-name">
-                            UserName224
-                        </div>
+                    <div class="user">
+                        <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="user-name">UserName24142</div>
                     </div>
-                    <div class="community-name">
-                        @Poland 
-                    </div>
-                </div>
-                <div class="meme-image">
-
-                </div>
-                <div class="meme-bottom">
-                    <div class="vote-panel">
-                        <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></button>
-                        <span class="vote-amount">2521</span>
-                    </div>
-                    <div class="meme-bottom-right">
-                        <button><i class="fa-solid fa-star"></i></button>
-                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="meme-container">
-                <div class="meme-header">
-                    <div class="user-info">
-                        <div class="user-logo">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="user-name">
-                            UserName224
-                        </div>
-                    </div>
-                    <div class="community-name">
-                        @Poland 
-                    </div>
+                    <div class="community-name">@Poland</div>
                 </div>
                 <div class="meme-text">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                 </div>
-                <div class="meme-image">
-
+                <div class="meme-content">
+                    <img src="Images/m1.jpg">
                 </div>
-                <div class="meme-bottom">
-                    <div class="vote-panel">
+                <div class="meme-footer">
+                    <div class="meme-footer-panel-left">
                         <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></button>
-                        <span class="vote-amount">2521</span>
+                        <button><i class="fa-solid fa-square-caret-down"></i></i></button>
+                        <span class="vote-number">2981</span>
                     </div>
-                    <div class="meme-bottom-right">
+
+                    <div class="meme-footer-panel-right">
                         <button><i class="fa-solid fa-star"></i></button>
-                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
+                        <button><i class="fa-solid fa-trash-can"></i></i></button>
                     </div>
                 </div>
             </div>
 
             <div class="meme-container">
                 <div class="meme-header">
-                    <div class="user-info">
-                        <div class="user-logo">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="user-name">
-                            UserName224
-                        </div>
+                    <div class="user">
+                        <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="user-name">UserName24142</div>
                     </div>
-                    <div class="community-name">
-                        @Poland 
-                    </div>
-                </div>
-                <div class="meme-image">
-
-                </div>
-                <div class="meme-bottom">
-                    <div class="vote-panel">
-                        <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></button>
-                        <span class="vote-amount">2521</span>
-                    </div>
-                    <div class="meme-bottom-right">
-                        <button><i class="fa-solid fa-star"></i></button>
-                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="meme-container">
-                <div class="meme-header">
-                    <div class="user-info">
-                        <div class="user-logo">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </div>
-                        <div class="user-name">
-                            UserName224
-                        </div>
-                    </div>
-                    <div class="community-name">
-                        @Poland 
-                    </div>
+                    <div class="community-name">@Poland</div>
                 </div>
                 <div class="meme-text">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                 </div>
-                <div class="meme-image">
-
+                <div class="meme-content">
+                    <img src="Images/m2.jpg">
                 </div>
-                <div class="meme-bottom">
-                    <div class="vote-panel">
+                <div class="meme-footer">
+                    <div class="meme-footer-panel-left">
                         <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></button>
-                        <span class="vote-amount">2521</span>
+                        <button><i class="fa-solid fa-square-caret-down"></i></i></button>
+                        <span class="vote-number">2981</span>
                     </div>
-                    <div class="meme-bottom-right">
+
+                    <div class="meme-footer-panel-right">
                         <button><i class="fa-solid fa-star"></i></button>
-                        <button class="trash-bin"><i class="fa-solid fa-trash"></i></button>
+                        <button><i class="fa-solid fa-trash-can"></i></i></button>
                     </div>
                 </div>
             </div>
+
+            <div class="meme-container">
+                <div class="meme-header">
+                    <div class="user">
+                        <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                        <div class="user-name">UserName24142</div>
+                    </div>
+                    <div class="community-name">@Poland</div>
+                </div>
+                <div class="meme-text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                </div>
+                <div class="meme-content">
+                    <img src="Images/m3.jpg">
+                </div>
+                <div class="meme-footer">
+                    <div class="meme-footer-panel-left">
+                        <button><i class="fa-solid fa-square-caret-up"></i></button>
+                        <button><i class="fa-solid fa-square-caret-down"></i></i></button>
+                        <span class="vote-number">2981</span>
+                    </div>
+
+                    <div class="meme-footer-panel-right">
+                        <button><i class="fa-solid fa-star"></i></button>
+                        <button><i class="fa-solid fa-trash-can"></i></i></button>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-        <div class="right-panel">
-            <div class="button-container">
+        <div class="panel-right">
+            <a href="signIn.php">
                 <div class="button sign-in">
                     Sign In
                 </div>
+            </a>
+
+            <a href="signUp.php">
                 <div class="button sign-up">
                     Sign Up
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </body>
