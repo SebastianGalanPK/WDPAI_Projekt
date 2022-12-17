@@ -26,7 +26,7 @@ a{
     flex-direction: row;
     justify-content: space-between;
 
-    .panel-left{
+    #panel-left{
         width: calc((100vw - 800px)/2);
 
         color: white;
@@ -209,6 +209,9 @@ a{
                 padding: 10px 25px;
                 margin-top: -25px;
                 font-size: 2em;
+                color: white;
+                background-color: inherit;
+                border: none;
             }
 
             #community-name{
@@ -345,7 +348,7 @@ a{
 
 
 @media screen and (max-width: 1700px) {
-    .panel-left{
+    #panel-left{
         width: calc((100vw - 600px)/2) !important;
     }
 
@@ -361,7 +364,7 @@ a{
 }
 
 @media screen and (max-width: 1400px) {
-    .panel-left{
+    #panel-left{
         width: calc((100vw - 400px)/2) !important;
     }
 
@@ -378,7 +381,7 @@ a{
 }
 
 @media screen and (max-width: 1100px) {
-    .panel-left{
+    #panel-left{
         display: initial !important;
 
         .panel-left-left{
@@ -394,6 +397,9 @@ a{
 }
 
 @media screen and (max-width: 1000px) {
+    #panel-left{
+        display: initial !important;
+    }
     .panel-right{
         display: none !important;
     }
@@ -404,7 +410,8 @@ a{
 }
 
 @media screen and (max-width: 900px) {
-    .panel-left{
+    #panel-left{
+        display: none !important;
         position: fixed;
         top: 80px !important;
         background-color: $bgColor;
@@ -412,6 +419,18 @@ a{
         z-index: 50;
         overflow-y: scroll;
         height: calc(100vh - 80px) !important;
+    }
+
+    #panel-left::-webkit-scrollbar {
+        width: 12px;
+    }
+    
+    #panel-left::-webkit-scrollbar-track {
+        background-color: #363636;
+    }
+    
+    #panel-left::-webkit-scrollbar-thumb {
+        background-color: gray;
     }
 
     .panel-center{

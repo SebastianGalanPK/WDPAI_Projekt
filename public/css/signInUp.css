@@ -47,6 +47,11 @@ body {
   font-weight: 800;
   text-shadow: 0 2px rgba(23, 23, 23, 0.3764705882);
 }
+.container .panel-left .form-container form .form-info {
+  color: rgb(255, 55, 0);
+  margin-top: 5px;
+  font-weight: 800;
+}
 .container .panel-left .form-container form .forgot-password {
   margin-left: auto;
   margin-top: 5px;

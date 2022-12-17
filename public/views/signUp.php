@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEEME - Sign Up</title>
 
-    <link rel="stylesheet" type = "text/css" href="Styles/signInUp.css">
+    <link rel="stylesheet" type = "text/css" href="/public/css/signInUp.css">
 
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,14 +22,23 @@
                 <span id="meeme">MEEME</b></span>
             </div>
             <div class="form-container">
-                <form>
+                <form action="register" method="POST">
                     <span class="form-title">Sign up...</span>
+                    <span class="form-info">
+                    <?php
+                    if(isset($messages)){
+                        foreach($messages as $message){
+                            echo $message;
+                        }
+                    }
+                    ?>
+                    </span>
                     <input name="login" type="text" placeholder="Login">
                     <input name="password" type="password" placeholder="Password">
                     <input name="email" type="text" placeholder="Email">
                     <div class="button-container">
-                        <button class="sign-in link">Sign Up</button>
-                        <button class="sign-up link">Already have?<br> Sign In</button>
+                        <button class="sign-in link" type="submit">Sign Up</button>
+                        <a href="signIn"><button class="sign-up link" type="button">Already have?<br> Sign In</button></a>
                     </div>
                 </form>
             </div>

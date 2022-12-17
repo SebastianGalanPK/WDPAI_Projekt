@@ -20,7 +20,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
 }
-.container .panel-left {
+.container #panel-left {
   width: calc((100vw - 800px) / 2);
   color: white;
   top: 0px;
@@ -28,20 +28,20 @@ a {
   flex-direction: row;
   justify-content: space-between;
 }
-.container .panel-left .panel-left-left {
+.container #panel-left .panel-left-left {
   margin-top: 15px;
 }
-.container .panel-left .panel-left-right {
+.container #panel-left .panel-left-right {
   margin-top: 15px;
   width: 300px;
   position: relative;
   align-items: start;
 }
-.container .panel-left .panel-left-right form {
+.container #panel-left .panel-left-right form {
   width: 90%;
   margin: auto;
 }
-.container .panel-left .panel-left-right input {
+.container #panel-left .panel-left-right input {
   width: 100%;
   height: 25px;
   border-radius: 10px;
@@ -49,34 +49,34 @@ a {
   background-color: #171717;
   color: white;
 }
-.container .panel-left .panel-left-right .nav-main {
+.container #panel-left .panel-left-right .nav-main {
   display: flex;
   flex-direction: column;
   margin-top: 25px;
   font-size: 1.5em;
 }
-.container .panel-left .panel-left-right .nav-main .button {
+.container #panel-left .panel-left-right .nav-main .button {
   padding: 25px 0 0 25px;
 }
-.container .panel-left .panel-left-right .nav-main .button .icon {
+.container #panel-left .panel-left-right .nav-main .button .icon {
   float: left;
 }
-.container .panel-left .panel-left-right .nav-main .button .name {
+.container #panel-left .panel-left-right .nav-main .button .name {
   float: left;
   margin-left: 15px;
 }
-.container .panel-left .panel-left-right .nav-user {
+.container #panel-left .panel-left-right .nav-user {
   width: 100%;
   max-height: 500px;
   margin-top: 25px;
   margin-bottom: 100px;
   color: gray;
 }
-.container .panel-left .panel-left-right .nav-user .header {
+.container #panel-left .panel-left-right .nav-user .header {
   border-bottom: 2px solid gray;
   padding-bottom: 5px;
 }
-.container .panel-left .panel-left-right .nav-user .community-list {
+.container #panel-left .panel-left-right .nav-user .community-list {
   display: flex;
   flex-direction: column;
   font-size: 1.5em;
@@ -84,26 +84,26 @@ a {
   height: inherit;
   max-height: 400px;
 }
-.container .panel-left .panel-left-right .nav-user .community-list .button {
+.container #panel-left .panel-left-right .nav-user .community-list .button {
   padding: 25px 0 0 25px;
 }
-.container .panel-left .panel-left-right .nav-user .community-list .button .icon {
+.container #panel-left .panel-left-right .nav-user .community-list .button .icon {
   float: left;
 }
-.container .panel-left .panel-left-right .nav-user .community-list .button .name {
+.container #panel-left .panel-left-right .nav-user .community-list .button .name {
   float: left;
   margin-left: 15px;
 }
-.container .panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar {
+.container #panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar {
   width: 12px;
 }
-.container .panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar-track {
+.container #panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar-track {
   background-color: #363636;
 }
-.container .panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar-thumb {
+.container #panel-left .panel-left-right .nav-user .community-list::-webkit-scrollbar-thumb {
   background-color: gray;
 }
-.container .panel-left .panel-left-right .post-new-meme {
+.container #panel-left .panel-left-right .post-new-meme {
   text-align: center;
   padding: 10px;
   width: 170px;
@@ -113,15 +113,15 @@ a {
   border: 2px solid #fff;
   border-radius: 15px;
 }
-.container .panel-left .panel-left-right .button-down {
+.container #panel-left .panel-left-right .button-down {
   display: none;
   flex-direction: column;
   align-items: center;
 }
-.container .panel-left .panel-left-right .button-down .button:hover {
+.container #panel-left .panel-left-right .button-down .button:hover {
   cursor: pointer;
 }
-.container .panel-left .panel-left-right .button-down .button {
+.container #panel-left .panel-left-right .button-down .button {
   height: 15px;
   width: 80px;
   text-align: center;
@@ -132,11 +132,11 @@ a {
   padding: 10px;
   border-radius: 10px;
 }
-.container .panel-left .panel-left-right .button-down .sign-up {
+.container #panel-left .panel-left-right .button-down .sign-up {
   background: linear-gradient(180deg, rgb(255, 118, 70) 0%, rgb(255, 192, 59) 100%);
   border: 2px solid #fff;
 }
-.container .panel-left .panel-left-right .button-down .sign-in {
+.container #panel-left .panel-left-right .button-down .sign-in {
   border: 2px solid #616161;
 }
 .container .panel-center {
@@ -164,6 +164,9 @@ a {
   padding: 10px 25px;
   margin-top: -25px;
   font-size: 2em;
+  color: white;
+  background-color: inherit;
+  border: none;
 }
 .container .panel-center .header #community-name {
   margin-left: 25px;
@@ -267,7 +270,7 @@ a {
 }
 
 @media screen and (max-width: 1700px) {
-  .panel-left {
+  #panel-left {
     width: calc((100vw - 600px) / 2) !important;
   }
   .panel-right {
@@ -279,7 +282,7 @@ a {
   }
 }
 @media screen and (max-width: 1400px) {
-  .panel-left {
+  #panel-left {
     width: calc((100vw - 400px) / 2) !important;
   }
   .panel-right {
@@ -292,19 +295,22 @@ a {
   }
 }
 @media screen and (max-width: 1100px) {
-  .panel-left {
+  #panel-left {
     display: initial !important;
   }
-  .panel-left .panel-left-left {
+  #panel-left .panel-left-left {
     text-align: center;
   }
-  .panel-left .panel-left-right {
+  #panel-left .panel-left-right {
     margin: auto;
     width: 250px !important;
     margin-top: 30px !important;
   }
 }
 @media screen and (max-width: 1000px) {
+  #panel-left {
+    display: initial !important;
+  }
   .panel-right {
     display: none !important;
   }
@@ -313,7 +319,8 @@ a {
   }
 }
 @media screen and (max-width: 900px) {
-  .panel-left {
+  #panel-left {
+    display: none !important;
     position: fixed;
     top: 80px !important;
     background-color: #171717;
@@ -321,6 +328,15 @@ a {
     z-index: 50;
     overflow-y: scroll;
     height: calc(100vh - 80px) !important;
+  }
+  #panel-left::-webkit-scrollbar {
+    width: 12px;
+  }
+  #panel-left::-webkit-scrollbar-track {
+    background-color: #363636;
+  }
+  #panel-left::-webkit-scrollbar-thumb {
+    background-color: gray;
   }
   .panel-center {
     width: 800px !important;
