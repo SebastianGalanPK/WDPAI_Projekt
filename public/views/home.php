@@ -14,24 +14,34 @@
     <script src="https://kit.fontawesome.com/2282473dfd.js" crossorigin="anonymous"></script>
 
 </head>
-
-<script type="text/javascript">
-    function toggleMenu(){
-        var panel = document.getElementById("panel-left");
-        if(panel.style.display=='none'){
-            panel.setAttribute('style', 'display: initial !important');
-        }
-        else{
-            panel.setAttribute('style', 'display: none !important');
-        }
-    }
-</script>
-
 <body>
     <div class="container">
+        <div id="post-a-new-meme-container">
+            <div class="container">
+                <span id="PANM-header">Post a new meme!</span>
+
+                <form>
+                    <input id="PANM-text" type="text" placeholder="Text (optional)">
+                    <div id="PANM-wrapper">
+                        <input id="upload" type="file">
+                        <label for="upload">Upload</label>
+                    </div>
+                    
+                    <div id="PANM-buttons">
+                        <button id="BCancel">CANCEL</button>
+                        <button id="BPost">POST</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div id="bg-button">
+
+        </div>
+
         <div id="panel-left">
             <div class="panel-left-left">
-                <img src="Images/logo150x29.png">
+                <img src="public/img/logo150x29.png">
             </div>
             <div class="panel-left-right">
                 <form>
@@ -264,4 +274,55 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+    function toggleMenu(){
+        var panel = document.getElementById("panel-left");
+        var bg_button = document.getElementById("bg-button");
+        if(panel.style.display=='' || panel.style.display=='none' || panel.style.display=='flex'){
+            panel.setAttribute('style', 'display: initial !important');
+            bg_button.setAttribute('style', 'display: initial');
+        }
+        else{
+            panel.setAttribute('style', 'display: none !important');
+            bg_button.setAttribute('style', 'display: none');
+        }
+    }
+
+    var bg_button = document.getElementById("bg-button");
+    if(bg_button!=null){
+        bg_button.addEventListener('click', function handleClick() {
+            toggleMenu();
+        });
+    }
+</script>
+
+<script type="text/javascript">
+        //Walka z responsywnością
+        function checkSize() {
+            var panel = document.getElementById("panel-left");
+            var bg_button = document.getElementById("bg-button");
+            if (window.innerWidth >= 900 && panel.style.display=='none') {
+                panel.setAttribute('style', 'display: initial');
+            }
+            if (window.innerWidth >= 1100 && panel.style.display=='initial') {
+                panel.setAttribute('style', 'display: flex');
+            }
+
+            if(window.innerWidth>=900){
+                bg_button.setAttribute('style', 'display: none;');
+            }
+
+            if(window.innerWidth<900 && panel.style.display=='initial'){
+                bg_button.setAttribute('style', 'display: initial');
+            }
+        }
+        function firstLoad(){
+            var panel = document.getElementById("panel-left");
+            panel.setAttribute('style', 'display: flex');
+        }
+        window.onresize = checkSize;
+        window.onload = firstLoad;
+</script>
+
 </html>

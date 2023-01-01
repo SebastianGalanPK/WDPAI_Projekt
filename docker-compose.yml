@@ -11,10 +11,22 @@ services:
       - .:/app/
     links:
       - php
+      - db
   php:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
     volumes:
       - .:/app/
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_DB=wdpai_projekt
+      - POSTGRES_USER=User123
+      - POSTGRES_PASSWORD=Tajne123
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgres/:/docker-entrypoint-initdb.d/
 
