@@ -9,8 +9,11 @@
     Routing::get('signIn', 'DefaultController');
     Routing::get('signUp', 'DefaultController');
 
-    Routing::get('login', 'SecurityController');
-    Routing::get('register', 'SecurityController');
+    Routing::post('login', 'SecurityController');
+    Routing::post('register', 'SecurityController');
+    Routing::post('logout', 'SecurityController');
+
+    Routing::post('addNewMeme', 'MemeController');
 
     Routing::run($path);
 ?>

@@ -1,15 +1,29 @@
 <?php
 
+require_once __DIR__."/../repository/CommunityRepository.php";
+
 class User{
+    private $id;
     private $login;
     private $password;
     private $email;
+    private $rank;
+    private $community;
 
-    public function __construct(string $login, string $password, string $email)
+    public function __construct(string $login, string $password, string $email, int $rank, int $id = 0)
     {
+        $this->id = $id;
         $this->login = $login;
         $this->password = $password;
         $this->email = $email;
+        $this->rank = $rank;
+
+        $cr = new CommunityRepository();
+        $this->community = $cr->getUserCommunity($id);
+    }
+
+    public function getID(){
+        return $this->id;
     }
 
     public function getLogin(){
@@ -22,6 +36,14 @@ class User{
 
     public function getPassword(){
         return $this->password;
+    }
+
+    public function getRank(){
+        return $this->rank;
+    }
+
+    public function getCommunity(){
+        return $this->community;
     }
 }
 

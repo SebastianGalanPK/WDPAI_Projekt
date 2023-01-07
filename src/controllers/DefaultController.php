@@ -1,15 +1,22 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../repository/CommunityRepository.php';
 
 class DefaultController extends AppController{
 
     public function index(){
-        $this->render('home');
+        //$cr = new CommunityRepository();
+        //$community = $cr->getUserCommunity(9);
+
+        $this->render('home', ['user_community' => $community]);
     }
 
     public function home(){
-        $this->render('home');
+        //$cr = new CommunityRepository();
+        //$community = $cr->getUserCommunity(9);
+
+        $this->render('home', ['user_community' => $community]);
     }
 
     public function signIn(){
@@ -20,5 +27,4 @@ class DefaultController extends AppController{
         $this->render('signUp');
     }
 }
-
 ?>

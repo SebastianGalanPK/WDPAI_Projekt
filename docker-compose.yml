@@ -12,19 +12,21 @@ services:
     links:
       - php
       - db
+
   php:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
     volumes:
       - .:/app/
+
   db:
     image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_DB=wdpai_projekt
-      - POSTGRES_USER=User123
-      - POSTGRES_PASSWORD=Tajne123
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - 5432:5432
     volumes:

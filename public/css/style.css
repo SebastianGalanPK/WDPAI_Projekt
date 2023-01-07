@@ -34,7 +34,7 @@ a {
 }
 .container #panel-left .panel-left-right {
   margin-top: 15px;
-  width: 300px;
+  width: 250px;
   position: relative;
   align-items: start;
 }
@@ -54,7 +54,7 @@ a {
   display: flex;
   flex-direction: column;
   margin-top: 25px;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 .container #panel-left .panel-left-right .nav-main .button {
   padding: 25px 0 0 25px;
@@ -80,13 +80,14 @@ a {
 .container #panel-left .panel-left-right .nav-user .community-list {
   display: flex;
   flex-direction: column;
-  font-size: 1.5em;
+  font-size: 1em;
   overflow-y: scroll;
   height: inherit;
   max-height: 400px;
 }
 .container #panel-left .panel-left-right .nav-user .community-list .button {
   padding: 25px 0 0 25px;
+  overflow: hidden;
 }
 .container #panel-left .panel-left-right .nav-user .community-list .button .icon {
   float: left;
@@ -107,22 +108,29 @@ a {
 .container #panel-left .panel-left-right .post-new-meme {
   text-align: center;
   padding: 10px;
+  display: block;
+  color: white;
+  font-size: 1.1em;
   width: 170px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 25px;
   background: linear-gradient(180deg, rgb(255, 118, 70) 0%, rgb(255, 192, 59) 100%);
   border: 2px solid #fff;
   border-radius: 15px;
 }
-.container #panel-left .panel-left-right .button-down {
+.container #panel-left .panel-left-right #button-down-wrapper {
+  display: none;
+}
+.container #panel-left .panel-left-right #button-down-wrapper .button-down {
   display: none;
   flex-direction: column;
   align-items: center;
 }
-.container #panel-left .panel-left-right .button-down .button:hover {
+.container #panel-left .panel-left-right #button-down-wrapper .button-down .button:hover {
   cursor: pointer;
 }
-.container #panel-left .panel-left-right .button-down .button {
+.container #panel-left .panel-left-right #button-down-wrapper .button-down .button {
   height: 15px;
   width: 80px;
   text-align: center;
@@ -133,11 +141,11 @@ a {
   padding: 10px;
   border-radius: 10px;
 }
-.container #panel-left .panel-left-right .button-down .sign-up {
+.container #panel-left .panel-left-right #button-down-wrapper .button-down .sign-up {
   background: linear-gradient(180deg, rgb(255, 118, 70) 0%, rgb(255, 192, 59) 100%);
   border: 2px solid #fff;
 }
-.container #panel-left .panel-left-right .button-down .sign-in {
+.container #panel-left .panel-left-right #button-down-wrapper .button-down .sign-in {
   border: 2px solid #616161;
 }
 .container .panel-center {
@@ -185,7 +193,11 @@ a {
 .container .panel-right .button:hover {
   cursor: pointer;
 }
-.container .panel-right .button {
+.container .panel-right #signInUpButton {
+  display: inline;
+  margin-left: 25px;
+}
+.container .panel-right #signInUpButton .button {
   height: 15px;
   width: 80px;
   text-align: center;
@@ -195,18 +207,56 @@ a {
   margin-top: 15px;
   padding: 10px;
   border-radius: 10px;
+  float: left;
 }
-.container .panel-right .sign-up {
+.container .panel-right #signInUpButton .sign-up {
   background: linear-gradient(180deg, rgb(255, 118, 70) 0%, rgb(255, 192, 59) 100%);
   border: 2px solid #fff;
 }
-.container .panel-right .sign-in {
+.container .panel-right #signInUpButton .sign-in {
   border: 2px solid #616161;
+}
+
+#user-info-right {
+  display: none;
+  justify-content: space-between;
+}
+
+#user-info-menu {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  width: 225px;
+  display: none;
+  justify-content: space-between;
+}
+
+.user-info {
+  min-width: 200px;
+  font-size: 0.8em;
+  margin: 25px 25px 0 0;
+  border: 1px solid #616161;
+}
+.user-info .user-logo {
+  padding: 15px;
+}
+.user-info .user-nick {
+  padding: 15px 0 15px 0;
+}
+.user-info .user-button {
+  padding: 15px;
+  border-left: 1px solid #616161;
+}
+.user-info form button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  color: white;
 }
 
 .meme-container {
   width: 100%;
-  min-height: 600px;
   border-bottom: 1px solid #616161;
   margin-top: 10px;
 }
@@ -333,6 +383,11 @@ a {
   padding: 10px;
   box-sizing: border-box;
 }
+#post-a-new-meme-container .container #PANM-community {
+  margin-top: 25px;
+  background-color: #161616;
+  color: white;
+}
 #post-a-new-meme-container .container #PANM-text {
   background-color: #222222;
   border: 2px solid #3A3A3A;
@@ -393,6 +448,14 @@ a {
     align-items: flex-end !important;
   }
 }
+@media screen and (max-width: 1500px) {
+  .panel-right #user-info-right {
+    display: none !important;
+  }
+  .panel-left-right #user-info-menu {
+    display: flex !important;
+  }
+}
 @media screen and (max-width: 1400px) {
   #panel-left {
     width: calc((100vw - 400px) / 2) !important;
@@ -400,13 +463,9 @@ a {
   .panel-right {
     width: calc((100vw - 1100px) / 2) !important;
     min-width: 150px !important;
-    display: flex;
-    flex-direction: column !important;
-    justify-content: start !important;
-    align-items: flex-end !important;
   }
 }
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
   #panel-left {
     display: initial !important;
   }

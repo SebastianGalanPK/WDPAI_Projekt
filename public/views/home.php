@@ -1,3 +1,18 @@
+<?php
+    session_start();
+    require_once __DIR__.'/../../src/models/User.php';
+    require_once __DIR__.'/../../src/models/Meme.php';
+    require_once __DIR__.'/../../src/repository/MemeRepository.php';
+
+    if(isset($_SESSION['user_session'])){
+        $user = unserialize($_SESSION['user_session']);
+    }
+
+    $mr = new MemeRepository();
+
+    $memes = $mr->getMeme();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +34,34 @@
         <div id="post-a-new-meme-container">
             <div class="container">
                 <span id="PANM-header">Post a new meme!</span>
+                <span class="form-info">
+                    <?php
+                    if(isset($messages)){
+                        foreach($messages as $message){
+                            echo $message;
+                        }
+                    }
+                    ?>
+                </span>
+                <form action="addNewMeme" method="POST" ENCTYPE="multipart/form-data">
+                    <label for="PANM-community">Select community:  </label>
+                    <select name="id_community" id="PANM-community" style="width:200px;">
+                        <option value="0">Home</option>
+                        <?php
+                        if(isset($_SESSION['user_session'])){
+                            foreach ($user->getCommunity() as $c):?>
+                                <option value="<?= $c->getID(); ?>"><?= $c->getName(); ?></option>
+                        <?php endforeach; }?>
+                    </select>
 
-                <form>
-                    <input id="PANM-text" type="text" placeholder="Text (optional)">
+                    <input name="text" id="PANM-text" type="text" placeholder="Text (optional)">
                     <div id="PANM-wrapper">
-                        <input id="upload" type="file">
+                        <input id="upload" type="file" name="file">
                         <label for="upload">Upload</label>
                     </div>
                     
                     <div id="PANM-buttons">
-                        <button id="BCancel">CANCEL</button>
+                        <button id="BCancel" type="button" onclick="togglePostANewMeme()">CANCEL</button>
                         <button id="BPost">POST</button>
                     </div>
                 </form>
@@ -51,15 +84,15 @@
                 <div class="nav-main">
                     <div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="name">Favourite</div>
+                        <div class="name">Home</div>
                     </div>
                     <div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="name">Favourite</div>
+                        <div class="name">Top</div>
                     </div>
                     <div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="name">Favourite</div>
+                        <div class="name">Last</div>
                     </div>
                     <div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
@@ -67,99 +100,82 @@
                     </div>
                 </div>
 
-                <div class="nav-user">
+                <div class="nav-user"
+                    <?php if(isset($_SESSION['user_session'])){ ?>
+                        style="display: block" 
+                        <?php } else { ?>
+                            style="display: none"
+                        <?php } ?>  
+                >
                     <div class="header">
                         Your community
                     </div>
 
                     <div class="community-list">
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
-
-                        <div class="button">
-                            <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="name">Favourite</div>
-                        </div>
+                        <?php
+                            if(isset($_SESSION['user_session'])){
+                            foreach ($user->getCommunity() as $l): ?>
+                                <div class="button">
+                                    <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
+                                    <div class="name"><?=$l->getName()?></div>
+                                </div>
+                        <?php endforeach; }?>
                     </div>
 
                 </div>
 
-                <div class="post-new-meme">
-                        Post a new meme
+                <button class="post-new-meme" id="post-a-new-meme-button" onclick="togglePostANewMeme()">
+                    Post a new meme
+                </button>
+
+                <div id="button-down-wrapper" <?php if(isset($_SESSION['user_session'])){
+                    ?>style="display: none"<?php } 
+                    else{ ?>
+                        style="display: block" <?php
+                    }
+                    ?>>
+                    <div class="button-down">
+                        <a href="signIn">
+                            <div class="button sign-in">
+                                Sign In
+                            </div>
+                        </a>
+
+                        <a href="signUp">
+                            <div class="button sign-up">
+                                Sign Up
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="button-down">
-                    <a href="signIn.php">
-                        <div class="button sign-in">
-                            Sign In
+                <div id="user-info-wrapper" <?php if(isset($_SESSION['user_session'])){
+                    ?>style="display: flex"<?php } 
+                    else{ ?>
+                        style="display: none" <?php
+                    }
+                    ?>>
+                    <div id="user-info-menu" class="user-info">
+                        <div class="user-logo">
+                            <i class="fa-solid fa-circle-user"></i>
                         </div>
-                    </a>
-
-                    <a href="signUp.php">
-                        <div class="button sign-up">
-                            Sign Up
+                        <div class="user-nick">
+                            <?php
+                                if(isset($_SESSION['user_session'])){
+                                    echo $user->getLogin();
+                                }
+                            ?>
                         </div>
-                    </a>
+                        <form action="logout" method="POST">
+                            <button type="submit" formaction="logout" formmethod="POST">
+                                <div class="user-button">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
                 </div>
+
             </div>
 
 
@@ -173,20 +189,26 @@
                 <span id="community-name">Home</span>
             </div>
 
+            <?php
+                foreach ($memes as $meme){
+                    ?>
             <div class="meme-container">
                 <div class="meme-header">
                     <div class="user">
                         <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="user-name">UserName24142</div>
+                        <div class="user-name"> <?php echo $meme->getUserName(); ?></div>
                     </div>
-                    <div class="community-name">@Poland</div>
+                    <div class="community-name">@<?php echo $meme->getCommunityName(); ?></div>
                 </div>
+
                 <div class="meme-text">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    <?php echo $meme->getText(); ?>
                 </div>
+
                 <div class="meme-content">
-                    <img src="public/img/m1.jpg">
+                    <img src="<?=$meme->getPath();?>">
                 </div>
+
                 <div class="meme-footer">
                     <div class="meme-footer-panel-left">
                         <button><i class="fa-solid fa-square-caret-up"></i></button>
@@ -201,76 +223,46 @@
                 </div>
             </div>
 
-            <div class="meme-container">
-                <div class="meme-header">
-                    <div class="user">
-                        <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="user-name">UserName24142</div>
-                    </div>
-                    <div class="community-name">@Poland</div>
-                </div>
-                <div class="meme-text">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
-                <div class="meme-content">
-                    <img src="public/img/m2.jpg">
-                </div>
-                <div class="meme-footer">
-                    <div class="meme-footer-panel-left">
-                        <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></i></button>
-                        <span class="vote-number">2981</span>
-                    </div>
-
-                    <div class="meme-footer-panel-right">
-                        <button><i class="fa-solid fa-star"></i></button>
-                        <button><i class="fa-solid fa-trash-can"></i></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="meme-container">
-                <div class="meme-header">
-                    <div class="user">
-                        <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
-                        <div class="user-name">UserName24142</div>
-                    </div>
-                    <div class="community-name">@Poland</div>
-                </div>
-                <div class="meme-text">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </div>
-                <div class="meme-content">
-                    <img src="public/img/m3.jpg">
-                </div>
-                <div class="meme-footer">
-                    <div class="meme-footer-panel-left">
-                        <button><i class="fa-solid fa-square-caret-up"></i></button>
-                        <button><i class="fa-solid fa-square-caret-down"></i></i></button>
-                        <span class="vote-number">2981</span>
-                    </div>
-
-                    <div class="meme-footer-panel-right">
-                        <button><i class="fa-solid fa-star"></i></button>
-                        <button><i class="fa-solid fa-trash-can"></i></i></button>
-                    </div>
-                </div>
-            </div>
-
-
+                <?php
+                }
+            ?>
         </div>
         <div class="panel-right">
-            <a href="signIn">
-                <div class="button sign-in">
-                    Sign In
+            <div id="user-info-right" class="user-info" <?php if(isset($_SESSION['user_session'])){
+                ?>style="display: flex"<?php } ?>>
+                <div class="user-logo">
+                    <i class="fa-solid fa-circle-user"></i>
                 </div>
-            </a>
+                <div class="user-nick">
+                    <?php
+                        if(isset($_SESSION['user_session'])){
+                            echo $user->getLogin();
+                        }
+                    ?>
+                </div>
+                <form action="logout" method="POST">
+                    <button type="submit" formaction="logout" formmethod="POST">
+                        <div class="user-button">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
 
-            <a href="signUp">
-                <div class="button sign-up">
-                    Sign Up
-                </div>
-            </a>
+            <div id="signInUpButton" <?php if(isset($_SESSION['user_session'])){
+                ?>style="display: none"<?php } ?>>
+                <a href="signIn">
+                    <div class="button sign-in">
+                        Sign In
+                    </div>
+                </a>
+
+                <a href="signUp">
+                    <div class="button sign-up">
+                        Sign Up
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </body>
@@ -295,6 +287,20 @@
             toggleMenu();
         });
     }
+</script>
+
+<script type="text/javascript">
+    function togglePostANewMeme(){
+        var panel = document.getElementById("post-a-new-meme-container");
+
+        if(panel.style.display=='flex'){
+            panel.setAttribute('style','display: none !important');
+        }
+        else{
+            panel.setAttribute('style','display: flex !important');
+        }
+    }
+
 </script>
 
 <script type="text/javascript">

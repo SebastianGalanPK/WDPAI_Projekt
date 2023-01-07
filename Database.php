@@ -9,19 +9,19 @@ class Database{
     private $database;
 
     public function __construct(){
-        $this->username = USERNAME;
-        $this->password = PASSWORD;
-        $this->host = HOST;
-        $this->database = DATABASE;
+        $this->username = 'dbuser';
+        $this->password = 'dbpwd';
+        $this->host = 'db';
+        $this->database = 'dbname';
     }
 
     public function connect(){
         try{
-            #pgsql:host=$this->host;port=5432;dbname=$this->database;
-            #jdbc:postgresql://localhost:5432/wdpai_projekt
-            $dsn = "jdbc:postgresql://localhost:5432/wdpai_projekt";
-            #$dsn = "pgsql:host=$this->host;port=5432;dbname=$this->database;";
-            $conn = new PDO($dsn, $this->username, $this->password );
+            $conn = new PDO(
+                "pgsql:host=$this->host;port=5432;dbname=$this->database",
+                $this->username,
+                $this->password
+            );
 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

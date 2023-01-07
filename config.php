@@ -1,7 +1,6 @@
 <?php
-const USERNAME = 'User123';
-const PASSWORD = 'Tajne123';
+const USERNAME = 'dbuser';
+const PASSWORD = 'dbpwn';
 const HOST = 'localhost';
-const DATABASE = 'wdpai_projekt';
-
+const DATABASE = 'dbname';
 ?>

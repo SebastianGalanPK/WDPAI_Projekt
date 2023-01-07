@@ -43,7 +43,7 @@ a{
 
         .panel-left-right{
             margin-top: 15px;
-            width: 300px;
+            width: 250px;
 
             position: relative;
             align-items: start;
@@ -67,7 +67,7 @@ a{
                 display: flex;
                 flex-direction: column;
                 margin-top: 25px;
-                font-size: 1.5em;
+                font-size: 1em;
 
                 .button{
                     padding: 25px 0 0 25px;
@@ -98,7 +98,7 @@ a{
                 .community-list{
                     display: flex;
                     flex-direction: column;
-                    font-size: 1.5em;
+                    font-size: 1em;
                     overflow-y: scroll;
 
                     height: inherit;
@@ -106,6 +106,7 @@ a{
 
                     .button{
                         padding: 25px 0 0 25px;
+                        overflow: hidden;
 
                         .icon{
                             float: left;
@@ -137,44 +138,53 @@ a{
                 text-align: center;
                 padding: 10px;
                 
+                display: block;
+                color: white;
+                font-size: 1.1em;
+
                 width: 170px;
 
                 margin-left: auto;
                 margin-right: auto;
+                margin-top: 25px;
 
                 background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
                 border: 2px solid #fff;
                 border-radius: 15px;
             }
 
-            .button-down{                
+            #button-down-wrapper{
                 display: none;
-                flex-direction: column;
-                align-items: center;
 
-                .button:hover{
-                    cursor: pointer;
-                }
-        
-                .button{
-                    height: 15px;
-                    width: 80px;
-                    text-align: center;
-                    font-weight: 800;
-                    line-height: 15px;
-                    margin-right: 15px;
-                    margin-top: 15px;
-                    padding: 10px;
-                    border-radius: 10px;
-                }
-        
-                .sign-up{
-                    background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
-                    border: 2px solid #fff;
-                }
-        
-                .sign-in{
-                    border: 2px solid $gray1;
+                .button-down{                
+                    display: none;
+                    flex-direction: column;
+                    align-items: center;
+    
+                    .button:hover{
+                        cursor: pointer;
+                    }
+            
+                    .button{
+                        height: 15px;
+                        width: 80px;
+                        text-align: center;
+                        font-weight: 800;
+                        line-height: 15px;
+                        margin-right: 15px;
+                        margin-top: 15px;
+                        padding: 10px;
+                        border-radius: 10px;
+                    }
+            
+                    .sign-up{
+                        background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+                        border: 2px solid #fff;
+                    }
+            
+                    .sign-in{
+                        border: 2px solid $gray1;
+                    }
                 }
             }
         }
@@ -236,33 +246,85 @@ a{
             cursor: pointer;
         }
 
-        .button{
-            height: 15px;
-            width: 80px;
-            text-align: center;
-            font-weight: 800;
-            line-height: 15px;
-            margin-right: 15px;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 10px;
-        }
+        #signInUpButton{
+            display: inline;
+            margin-left: 25px;
 
-        .sign-up{
-            background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
-            border: 2px solid #fff;
-        }
+            .button{
+                height: 15px;
+                width: 80px;
+                text-align: center;
+                font-weight: 800;
+                line-height: 15px;
+                margin-right: 15px;
+                margin-top: 15px;
+                padding: 10px;
+                border-radius: 10px;
 
-        .sign-in{
-            border: 2px solid $gray1;
+                float: left;
+            }
+    
+            .sign-up{
+                background: linear-gradient(180deg, rgba(255,118,70,1) 0%, rgba(255,192,59,1) 100%);
+                border: 2px solid #fff;
+            }
+    
+            .sign-in{
+                border: 2px solid $gray1;
+            }
         }
     }
 }
 
+#user-info-right{
+    display: none;
+    justify-content: space-between;
+}
+
+#user-info-menu{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+
+    width: 225px;
+
+    display: none;
+    justify-content: space-between;
+}
+
+.user-info{
+    min-width: 200px;
+    font-size: 0.8em;
+    margin: 25px 25px 0 0;
+
+    .user-logo{
+        padding: 15px;
+    }
+
+    .user-nick{
+        padding: 15px 0 15px 0;
+    }
+
+    .user-button {
+        padding: 15px;
+        border-left: 1px solid $gray1;
+    }
+
+    form{
+        button{
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: inherit;
+            color: white;
+        }
+    }
+
+    border: 1px solid $gray1;
+}
 
 .meme-container{
     width: 100%;
-    min-height: 600px;
 
     border-bottom: 1px solid $gray1;
     margin-top: 10px;
@@ -414,6 +476,12 @@ a{
                 box-sizing: border-box;
             }
         }
+
+        #PANM-community{
+            margin-top: 25px;
+            background-color: #161616;
+            color: white;
+        }
         
         #PANM-text{
             background-color: #222222;
@@ -488,6 +556,22 @@ a{
     }
 }
 
+@media screen and (max-width: 1500px){
+    .panel-right{
+        #user-info-right{
+            display: none !important;
+        }
+
+
+    }
+
+    .panel-left-right{
+        #user-info-menu{
+            display: flex !important;
+        }
+    }
+}
+
 @media screen and (max-width: 1400px) {
     #panel-left{
         width: calc((100vw - 400px)/2) !important;
@@ -496,16 +580,10 @@ a{
     .panel-right{
         width: calc((100vw - 1100px)/2) !important;
         min-width: 150px !important;
-
-        display: flex;
-        flex-direction: column !important;
-        justify-content: start !important;
-
-        align-items: flex-end !important;
     }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
     #panel-left{
         display: initial !important;
 
