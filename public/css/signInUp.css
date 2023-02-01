@@ -116,6 +116,11 @@ body {
   top: -120px;
 }
 
+.no-valid {
+  border: 3px solid red !important;
+  background-color: rgba(255, 0, 0, 0.064);
+}
+
 .link:hover {
   cursor: pointer;
   font-size: 20px;

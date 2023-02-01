@@ -3,6 +3,7 @@
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/MemeController.php';
+require_once 'src/controllers/CommunityController.php';
 
 class Routing{
     public static $routes;
@@ -16,7 +17,9 @@ class Routing{
     }
 
     public static function run($url){
-        $action = explode(".", $url)[0];
+        $urlParts = explode("/", $url);
+
+        $action = $urlParts[0];
 
         if(!array_key_exists($action, self::$routes)){
             $action = 'home';
@@ -24,6 +27,10 @@ class Routing{
 
         $controller = self::$routes[$action];
         $object = new $controller;
-        $object->$action();
+
+        $id = $urlParts[1] ?? '';
+        $user_id = $urlParts[2] ?? '';
+
+        $object->$action($id, $user_id);
     }
 }

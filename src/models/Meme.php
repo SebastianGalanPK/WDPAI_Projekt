@@ -9,16 +9,17 @@ class Meme
     private $community_nickname;
     private $user_login;
 
-    //1 - vote up, -1 - vote down, 0
-    private $rate_typ;
+    private $id;
 
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
-    public function __construct(string $filename, string $text, string $community_nickname, string $user_login){
+    public function __construct(int $id, string $filename, string $text, string $community_nickname, string $user_login, int $rate = 0){
+        $this->id = $id;
         $this->filename = $filename;
         $this->text = $text;
         $this->community_nickname = $community_nickname;
         $this->user_login = $user_login;
+        $this->rate = $rate;
     }
 
     public function getUserName(){
@@ -31,6 +32,14 @@ class Meme
 
     public function getText(){
         return $this->text;
+    }
+
+    public function getRate(){
+        return $this->rate;
+    }
+
+    public function getID(){
+        return $this->id;
     }
 
     public function getPath(){

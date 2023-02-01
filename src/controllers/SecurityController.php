@@ -53,8 +53,8 @@ class SecurityController extends AppController{
         $password = trim($password);
         $email = trim($email);
 
-        if(strlen($login) < 5 || strlen($login)>30){
-            return $this->render("signUp", ['messages' => ['Your login should be between 5 and 30 letters.']]);
+        if(strlen($login) < 5 || strlen($login)>16){
+            return $this->render("signUp", ['messages' => ['Your login should be between 5 and 16 letters.']]);
         }
         if(strlen($password) < 8){
             return $this->render("signUp", ['messages' => ['Your password should have at least 8 letters.']]);

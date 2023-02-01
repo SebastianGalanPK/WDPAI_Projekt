@@ -15,5 +15,14 @@
 
     Routing::post('addNewMeme', 'MemeController');
 
+    Routing::post('search', 'CommunityController');
+
+    Routing::get('like', 'MemeController');
+    Routing::get('dislike', 'MemeController');
+    Routing::get('remove', 'MemeController');
+    Routing::get('checkRate', 'MemeController');
+
+    Routing::get('community', 'MemeController');
+
     Routing::run($path);
 ?>

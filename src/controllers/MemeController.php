@@ -9,7 +9,18 @@ class MemeController extends AppController{
     const SUPPORTED_TYPES = ['image/png','image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
+    private $memeRepository;
+
     private $messages = [];
+
+    private $memes;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->memeRepository = new MemeRepository();
+    }
+
     public function addNewMeme(){
         if($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])){
             $repository = new MemeRepository();
@@ -23,7 +34,43 @@ class MemeController extends AppController{
             return $this->render('home');
         }
 
-        $this->render('home', ['messages' => $this->messages]);
+        header("Location: /../../index.php");
+        exit();
+
+        #$this->render('home', ['messages' => $this->messages]);
+    }
+
+    public function like(int $id, int $user_id){
+        $this->memeRepository->like($id, $user_id);
+        http_response_code(200);
+    }
+
+    public function dislike(int $id, int $user_id){
+        $this->memeRepository->dislike($id, $user_id);
+        http_response_code(200);
+    }
+
+    public function checkRate(int $id){
+        $value = $this->memeRepository->checkRate($id);
+        http_response_code(200);
+
+        return $value;
+    }
+
+    public function community(string $community_nickname){
+        $_SESSION['selected_community'] = $community_nickname;
+        $this->memes = $this->memeRepository->getMemeByCommunity($community_nickname);
+
+        $this->render('home', ['memes'=> $this->memes]);
+    }
+
+    public function getMeme(){
+        return $this->memes;
+    }
+
+    public function remove(int $id){
+        $this->memeRepository->removeMeme($id);
+        http_response_code(200);
     }
 
     private function validate(array $file): bool{

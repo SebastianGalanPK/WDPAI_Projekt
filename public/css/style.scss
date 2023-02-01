@@ -48,9 +48,16 @@ a{
             position: relative;
             align-items: start;
 
-            form{
-                width: 90%;
-                margin: auto;
+            #search-result{
+                display: none;
+                background-color: $bgColor;
+                width: 100%;
+                height: 400px;
+                position: absolute;
+                top: 30px;
+
+                border: 1px solid $gray1;
+                z-index: 1;
             }
 
             input{
@@ -60,6 +67,8 @@ a{
                 border: 1px solid $gray1;
                 background-color: $bgColor;
 
+                z-index: 50;
+
                 color: white;
             }
 
@@ -68,18 +77,18 @@ a{
                 flex-direction: column;
                 margin-top: 25px;
                 font-size: 1em;
+            }
 
-                .button{
-                    padding: 25px 0 0 25px;
+            .button{
+                padding: 25px 0 0 25px;
 
-                    .icon{
-                        float: left;
-                    }
+                .icon{
+                    float: left;
+                }
 
-                    .name{
-                        float: left;
-                        margin-left: 15px;
-                    }
+                .name{
+                    float: left;
+                    margin-left: 15px;
                 }
             }
 
@@ -103,22 +112,6 @@ a{
 
                     height: inherit;
                     max-height: 400px;
-
-                    .button{
-                        padding: 25px 0 0 25px;
-                        overflow: hidden;
-
-                        .icon{
-                            float: left;
-                        }
-
-                        .name{
-                            float: left;
-                            margin-left: 15px;
-                        }
-                    }
-
-
                 }
 
                 .community-list::-webkit-scrollbar {
@@ -405,6 +398,29 @@ a{
                 color: white;
             }
         }
+    }
+}
+
+.community{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 25px;
+
+    .cm-button{
+        overflow: hidden;
+
+        .cm-icon{
+            float: left;
+        }
+
+        .cm-name{
+            float: left;
+            margin-left: 15px;
+        }
+    }
+
+    .star-button{
+        margin-right: 15px;
     }
 }
 

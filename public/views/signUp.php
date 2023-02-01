@@ -11,7 +11,7 @@
     <title>MEEME - Sign Up</title>
 
     <link rel="stylesheet" type = "text/css" href="/public/css/signInUp.css">
-
+    <script type="text/javascript" src="./public/js/signUpValidation.js" defer></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

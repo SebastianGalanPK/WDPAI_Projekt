@@ -19,4 +19,17 @@ class CommunityRepository extends Repository
 
         return $array;
     }
+
+    public function getCommunityByName(string $searchString){
+        $searchString = '%'.strtolower($searchString).'%';
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM "Community" WHERE LOWER(nickname) LIKE :search OR LOWER(name) LIKE :search
+        ');
+
+        $stmt->bindParam(':search', $searchString, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

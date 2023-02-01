@@ -6,17 +6,11 @@ require_once __DIR__.'/../repository/CommunityRepository.php';
 class DefaultController extends AppController{
 
     public function index(){
-        //$cr = new CommunityRepository();
-        //$community = $cr->getUserCommunity(9);
-
-        $this->render('home', ['user_community' => $community]);
+        $this->render('home');
     }
 
     public function home(){
-        //$cr = new CommunityRepository();
-        //$community = $cr->getUserCommunity(9);
-
-        $this->render('home', ['user_community' => $community]);
+        $this->render('home');
     }
 
     public function signIn(){
