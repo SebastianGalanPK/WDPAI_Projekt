@@ -40,14 +40,22 @@ class MemeController extends AppController{
         #$this->render('home', ['messages' => $this->messages]);
     }
 
-    public function like(int $id, int $user_id){
-        $this->memeRepository->like($id, $user_id);
-        http_response_code(200);
+    public function like(int $id){
+        if(isset($_SESSION['user_session'])) {
+            $user = unserialize($_SESSION['user_session']);
+
+            $this->memeRepository->like($id, $user->getID());
+            http_response_code(200);
+        }
     }
 
-    public function dislike(int $id, int $user_id){
-        $this->memeRepository->dislike($id, $user_id);
-        http_response_code(200);
+    public function dislike(int $id){
+        if(isset($_SESSION['user_session'])) {
+            $user = unserialize($_SESSION['user_session']);
+
+            $this->memeRepository->dislike($id, $user->getID());
+            http_response_code(200);
+        }
     }
 
     public function checkRate(int $id){
@@ -64,6 +72,21 @@ class MemeController extends AppController{
         $this->render('home', ['memes'=> $this->memes]);
     }
 
+    public function favourite(){
+        if(isset($_SESSION['user_session'])) {
+            $user = unserialize($_SESSION['user_session']);
+            $this->memes = $this->memeRepository->getFavouriteMeme($user->getID());
+
+            $this->render('home', ['memes'=> $this->memes]);
+        }
+    }
+
+    public function top(){
+        $this->memes = $this->memeRepository->getTopMeme();
+
+        $this->render('home', ['memes'=> $this->memes]);
+    }
+
     public function getMeme(){
         return $this->memes;
     }
@@ -71,6 +94,15 @@ class MemeController extends AppController{
     public function remove(int $id){
         $this->memeRepository->removeMeme($id);
         http_response_code(200);
+    }
+
+    public function changeFavouriteStatus(int $id){
+        if(isset($_SESSION['user_session'])) {
+            $user = unserialize($_SESSION['user_session']);
+
+            $this->memeRepository->changeFavouriteStatus($id, $user->getID());
+            http_response_code(200);
+        }
     }
 
     private function validate(array $file): bool{

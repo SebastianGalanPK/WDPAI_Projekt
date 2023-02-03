@@ -132,6 +132,38 @@ class MemeRepository extends Repository
         return $result['maxid'];
     }
 
+    public function changeFavouriteStatus(int $id, int $user_id){
+        $stmt = $this->database->connect()->prepare('
+            SELECT count(*) amount FROM "FavouriteMeme" WHERE "ID_User" = ? AND "ID_Meme" = ?
+        ');
+
+        $stmt->execute([$user_id, $id]);
+        $result = $stmt->fetch();
+
+        if($result['amount']>0){
+            $this->removeMemeFromFavourite($id, $user_id);
+        }
+        else{
+            $this->addMemeToFavourite($id, $user_id);
+        }
+    }
+
+    public function addMemeToFavourite(int $id, int $user_id){
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO "FavouriteMeme"("ID_User", "ID_Meme") VALUES (?, ?);
+        ');
+
+        $stmt->execute([$user_id, $id]);
+    }
+
+    public function removeMemeFromFavourite(int $id, int $user_id){
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM "FavouriteMeme" WHERE "ID_User" = ? AND "ID_Meme" = ?
+        ');
+
+        $stmt->execute([$user_id, $id]);
+    }
+
     public function checkRate($id_meme) : int{
         $stmt_rate = $this->database->connect()->prepare('
                 SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
@@ -141,6 +173,60 @@ class MemeRepository extends Repository
         $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
 
         return $result_rate['rate'];
+    }
+
+    public function getFavouriteMeme(int $user_id) {
+        $stmt = $this->database->connect()->prepare('
+            SELECT "Meme".id id_meme, * FROM "Meme" INNER JOIN "Community" C on C.id = "Meme"."ID_Community" INNER JOIN "User" U on U.id = "Meme"."ID_User" JOIN "FavouriteMeme" FM on "Meme".id = FM."ID_Meme" WHERE FM."ID_User" = ?;
+        ');
+        $stmt->execute([$user_id]);
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $r){
+            $stmt_rate = $this->database->connect()->prepare('
+                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
+            ');
+
+            $stmt_rate->execute([$r['id_meme']]);
+            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
+
+            if($r['ID_Community']==0){
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
+            }
+            else{
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
+            }
+        }
+
+        return $array;
+    }
+
+    public function getTopMeme() {
+        $stmt = $this->database->connect()->prepare('
+            SELECT meme.id id_meme, sum(rate_value) rate, * FROM public."Meme" meme INNER JOIN public."User" ON meme."ID_User" = "User".id Inner JOIN "Community" C on meme."ID_Community" = C.id INNER JOIN "RateMeme" RM on meme.id = RM."ID_Meme" GROUP BY meme.id, "User".id, c.id, rm.id ORDER BY rate DESC;
+        ');
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $r){
+            $stmt_rate = $this->database->connect()->prepare('
+                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
+            ');
+
+            $stmt_rate->execute([$r['id_meme']]);
+            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
+
+            if($r['ID_Community']==0){
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
+            }
+            else{
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
+            }
+        }
+
+        return $array;
     }
 
     public function getMemeByCommunity(string $nickname){
@@ -180,5 +266,19 @@ class MemeRepository extends Repository
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $result['amount'];
+    }
+
+    public function checkIfPlayerLikesMeme(int $id, int $id_meme) : bool{
+        $stmt = $this->database->connect()->prepare('
+            SELECT count(*) amount FROM "FavouriteMeme" WHERE "ID_User" = ? AND "ID_Meme" = ?;
+        ');
+
+        $stmt->execute([$id, $id_meme]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($result['amount']>=1){
+            return true;
+        }
+        return false;
     }
 }

@@ -18,8 +18,7 @@ class User{
         $this->email = $email;
         $this->rank = $rank;
 
-        $cr = new CommunityRepository();
-        $this->community = $cr->getUserCommunity($id);
+        $this->refreshCommunity();
     }
 
     public function getID(){
@@ -44,6 +43,16 @@ class User{
 
     public function getCommunity(){
         return $this->community;
+    }
+
+    public function refreshCommunity(){
+        $cr = new CommunityRepository();
+        $this->community = $cr->getUserCommunity($this->id);
+    }
+
+    public function checkIfPlayerLikesMeme(int $id_meme) : bool{
+        $mr = new MemeRepository();
+        return $mr->checkIfPlayerLikesMeme($this->id, $id_meme);
     }
 }
 

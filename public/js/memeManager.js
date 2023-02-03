@@ -12,7 +12,7 @@ function giveLike(){
 
     const voteNuber = likes.parentElement.querySelector(".vote-number");
 
-    fetch('/like/'+id+'/9').then(function (){
+    fetch('/like/'+id).then(function (){
         voteNuber.innerHTML = parseInt(voteNuber.innerHTML) + 1;
     });
 
@@ -29,7 +29,7 @@ function giveDislike(){
 
     const voteNuber = dislikes.parentElement.querySelector(".vote-number");
 
-    fetch('/dislike/'+id+'/9').then(function (){
+    fetch('/dislike/'+id).then(function (){
         voteNuber.innerHTML = parseInt(voteNuber.innerHTML) - 1;
     });
 
@@ -47,11 +47,23 @@ function removeMeme(){
         container.setAttribute('style', 'display: none');
     });
 }
-function addFavouriteMeme(){
+function changeFavouriteMeme(){
+    const starButton = this;
 
+    const container = starButton.parentElement.parentElement.parentElement;
+    const id = container.getAttribute("id");
+
+    fetch('/changeFavouriteStatus/'+id).then(function (){
+        if(starButton.style.color=="yellow"){
+            starButton.setAttribute('style', 'color: white');
+        }
+        else{
+            starButton.setAttribute('style', 'color: yellow');
+        }
+    });
 }
 
 likeButtons.forEach(button => button.addEventListener("click", giveLike));
 dislikeButtons.forEach(button => button.addEventListener("click", giveDislike));
 removeButtons.forEach(button => button.addEventListener("click", removeMeme));
-favouriteMemeButtons.forEach(button=>button.addEventListener("click", addFavouriteMeme));
+favouriteMemeButtons.forEach(button=>button.addEventListener("click", changeFavouriteMeme));

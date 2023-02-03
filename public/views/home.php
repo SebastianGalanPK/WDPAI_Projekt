@@ -76,6 +76,25 @@
             </div>
         </div>
 
+        <div id="create-a-new-community-container">
+            <div class="container">
+                <div class="header">Create a new community</div>
+
+                <form action="addNewCommunity" method="POST" ENCTYPE="multipart/form-data">
+                    <label for="Comm-name">Name:  </label><br>
+                    <input name="comm-name" id="comm-name" type="text" placeholder="Name"><br><br>
+                    <label for="Comm-shortname">Shortname:  </label><br>
+                    <input name="comm-shortname" id="comm-shortname" type="text" placeholder="Short name">
+                    
+                    <div class="comm-buttons">
+                        <button id="BCancel" type="button" onclick="toggleCreateANewCommunity()">CANCEL</button>
+                        <button id="BPost">CREATE</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>                        
+
         <div id="bg-button" onmouseenter="toggleSearchResult()">
 
         </div>
@@ -89,27 +108,32 @@
                 <input id="community-search" type="text" placeholder="Search" onclick="toggleSearchResult()">
 
                 <div id="search-result">
-
+                    <div id="search-result-content">
+                        
+                    </div>
+                    <div id="create-a-new-community" onclick="toggleCreateANewCommunity()">
+                        Create a new community
+                    </div>
                 </div>        
 
 
                 <div class="nav-main">
-                    <div class="button">
+                    <a href="/index.php"><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Home</div>
-                    </div>
-                    <div class="button">
+                        </div></a>
+                    <a href="/favourite/"><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Top</div>
-                    </div>
+                        </div></a>
                     <div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Last</div>
                     </div>
-                    <div class="button">
+                    <a href="/favourite/"><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Favourite</div>
-                    </div>
+                    </div></a>
                 </div>
 
                 <div class="nav-user"
@@ -126,18 +150,21 @@
                     <div class="community-list">
                         <?php
                             if(isset($_SESSION['user_session'])){
-                            foreach ($user->getCommunity() as $l): ?>
-                            <div class="community" id="<?=$l->getNickname()?>">
-                                <div class="cm-button">
-                                    <div class="cm-icon"><i class="fa-solid fa-circle-user"></i></div>
-                                    <div class="cm-name"><?=$l->getName()?></div>
-                                </div>
-                                <div class="star-button">
-                                    <div class="icon"><i class="fa-solid fa-star"></i></div>
-                                </div>
+                                if($user->getCommunity()!=null){
+                                    foreach ($user->getCommunity() as $l): ?>
+                                        <div class="community" id="<?=$l->getNickname()?>">
+                                            <div class="cm-button">
+                                                <div class="cm-icon"><i class="fa-solid fa-circle-user"></i></div>
+                                                <div class="cm-name"><?=$l->getName()?></div>
+                                            </div>
+                                            <div class="cm-star-button" style="color: yellow">
+                                                <div class="icon"><i class="fa-solid fa-star"></i></div>
+                                            </div>
 
-                            </div>
-                        <?php endforeach; }?>
+                                        </div>
+                                    <?php endforeach;
+                                }
+                             }?>
                     </div>
 
                 </div>
@@ -204,7 +231,34 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 
-                <span id="community-name">Home</span>
+                <span id="community-name">
+                    <?php
+                    $path = trim($_SERVER['REQUEST_URI'], '/');
+                    $path = parse_url($path, PHP_URL_PATH);
+                    $urlParts = explode("/", $path);
+
+                    $action = $urlParts[0];
+
+                    if($action=="community"){
+                        $action = 'home';
+                        $id = $urlParts[1] ?? '';
+                        $cr = new CommunityRepository();
+                        $id = $cr->convertNicknameToName($id);
+                    }
+                    else if($action=="favourite"){
+                        $id = 'Favourite';
+                    }
+                    else if($action=="top"){
+                        $id = 'Top';
+                    }
+                    else{
+                        $id = "Home";
+                    }
+                    echo $id;
+
+                    ?>
+
+                </span>
             </div>
 
             <?php
@@ -256,7 +310,11 @@
                     </div>
 
                     <div class="meme-footer-panel-right">
-                        <button class="favourite-meme-button"><i class="fa-solid fa-star"></i></button>
+                        <button class="favourite-meme-button" <?php if(isset($_SESSION['user_session']) && $user->checkIfPlayerLikesMeme($meme->getID())){
+                            ?>style="color: yellow"<?php } else {
+                                ?>style="color: white"<?php
+                            }
+                        ?>><i class="fa-solid fa-star"></i></button>
 
                         <?php if(isset($_SESSION['user_session']) && $user->getRank()==1){
                             echo "<button class=\"remove-button\"><i class=\"fa-solid fa-trash-can\"></i></i></button>";
@@ -316,7 +374,7 @@
             <div class="cm-icon"><i class="fa-solid fa-circle-user"></i></div>
             <div class="cm-name">community-name</div>
         </div>
-        <div class="star-button">
+        <div class="cm-star-button">
             <div class="icon"><i class="fa-solid fa-star"></i></div>
         </div>
     </div>
@@ -370,6 +428,16 @@
         }
     }
 
+    function toggleCreateANewCommunity(){
+        var panel = document.getElementById("create-a-new-community-container");
+
+        if(panel.style.display=='flex'){
+            panel.setAttribute('style','display: none !important');
+        }
+        else{
+            panel.setAttribute('style','display: flex !important');
+        }
+    }
 </script>
 
 <script type="text/javascript">

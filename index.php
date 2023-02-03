@@ -14,6 +14,7 @@
     Routing::post('logout', 'SecurityController');
 
     Routing::post('addNewMeme', 'MemeController');
+    Routing::post('addNewCommunity', 'CommunityController');
 
     Routing::post('search', 'CommunityController');
 
@@ -22,7 +23,12 @@
     Routing::get('remove', 'MemeController');
     Routing::get('checkRate', 'MemeController');
 
+    Routing::get('favourite', 'MemeController');
+    Routing::get('top', 'MemeController');
+
     Routing::get('community', 'MemeController');
+    Routing::get('changeFavouriteStatus', 'MemeController');
+    Routing::get('toggleCommunityStatus', 'CommunityController');
 
     Routing::run($path);
 ?>

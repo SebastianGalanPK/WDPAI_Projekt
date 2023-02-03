@@ -1,5 +1,5 @@
 const search = document.querySelector('input[id="community-search"]');
-const communityContainer = document.querySelector('#search-result');
+const communityContainer = document.querySelector('#search-result-content');
 
 search.addEventListener("keyup", function (event) {
     event.preventDefault();
@@ -33,8 +33,6 @@ function createCommunity(community){
 
     const container = clone.querySelector(".community");
     container.setAttribute("id", community.nickname);
-
-    console.log(community);
 
     const name = clone.querySelector('.cm-name');
     name.innerHTML = community.name;
