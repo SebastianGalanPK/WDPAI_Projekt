@@ -26,7 +26,9 @@ class SecurityController extends AppController{
             return $this->render("signIn", ['messages' => ['User with this login not exist!']]);
         }
 
-        if($password!==$user->getPassword()){
+        //$pass = password_verify($user->getPassword(), PASSWORD_BCRYPT);
+
+        if(password_verify($password, $user->getPassword())){
             return $this->render("signIn", ['messages' => ['Wrong password!']]);
         }
 
@@ -34,8 +36,6 @@ class SecurityController extends AppController{
 
         header("Location: /../../index.php");
         exit();
-
-        #return $this->render('home', ['user'=> $user, 'user_community' => $user_community]);
     }
 
     public function register(){
@@ -70,11 +70,14 @@ class SecurityController extends AppController{
             return $this->render("signUp", ['messages' => ['This email is taken!']]);
         }
 
-        $userRepository->addNewUser($login, $password, $email);
+        $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+        $userRepository->addNewUser($login, $passwordHashed, $email);
 
-        $user = new User($login, $password, $email, 1);
+        //$user = new User($login, $passwordHashed, $email, 0);
 
-        return $this->render('home', ['user'=> $user]);
+        //header("Location: signIn.php");
+
+        return $this->render('signIn', ['messages'=> ['Sing In Now']]);
     }
 
     public function logout(){

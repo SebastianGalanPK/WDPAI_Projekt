@@ -31,13 +31,12 @@ class MemeController extends AppController{
                 dirname(__DIR__).self::UPLOAD_DIRECTORY.$filename
             );
 
-            return $this->render('home');
+            header("Location: /../../index.php");
+            exit();
         }
 
         header("Location: /../../index.php");
         exit();
-
-        #$this->render('home', ['messages' => $this->messages]);
     }
 
     public function like(int $id){
@@ -69,7 +68,7 @@ class MemeController extends AppController{
         $_SESSION['selected_community'] = $community_nickname;
         $this->memes = $this->memeRepository->getMemeByCommunity($community_nickname);
 
-        $this->render('home', ['memes'=> $this->memes]);
+        $this->render('home', ['memes'=> $this->getMeme()]);
     }
 
     public function favourite(){
@@ -77,23 +76,37 @@ class MemeController extends AppController{
             $user = unserialize($_SESSION['user_session']);
             $this->memes = $this->memeRepository->getFavouriteMeme($user->getID());
 
-            $this->render('home', ['memes'=> $this->memes]);
+            $this->render('home', ['memes'=> $this->getMeme()]);
         }
     }
 
     public function top(){
         $this->memes = $this->memeRepository->getTopMeme();
 
-        $this->render('home', ['memes'=> $this->memes]);
+        $this->render('home', ['memes'=> $this->getMeme()]);
+    }
+
+    public function last(){
+        $this->memes = $this->memeRepository->getLastMeme();
+
+        $this->render('home', ['memes'=> $this->getMeme()]);
     }
 
     public function getMeme(){
+        if($this->memes==null){
+            return "null";
+        }
         return $this->memes;
     }
 
     public function remove(int $id){
-        $this->memeRepository->removeMeme($id);
-        http_response_code(200);
+        if(isset($_SESSION['user_session'])) {
+            $user = unserialize($_SESSION['user_session']);
+            if($user->getRank()==1){
+                $this->memeRepository->removeMeme($id);
+                http_response_code(200);
+            }
+        }
     }
 
     public function changeFavouriteStatus(int $id){

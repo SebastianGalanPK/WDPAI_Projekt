@@ -12,7 +12,7 @@
     $mr = new MemeRepository();
     $mc = new MemeController();
 
-    if(!isset($memes) || $memes == null){
+    if(!isset($memes)){
         $memes = $mr->getMeme();
     }
 ?>
@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meeme.com - Daily dose of memes</title>
 
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,15 +122,25 @@
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Home</div>
                         </div></a>
-                    <a href="/favourite/"><div class="button">
+                    <a href="/top"><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Top</div>
                         </div></a>
-                    <div class="button">
+                    <a href="/last"><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Last</div>
-                    </div>
-                    <a href="/favourite/"><div class="button">
+                        </div></a>
+                    <a href="<?php
+                        if(isset($_SESSION['user_session'])){
+                            echo "/favourite";
+                        }
+                        else{
+                            echo "/signIn";
+                        }
+                    ?>
+
+
+                    "><div class="button">
                         <div class="icon"><i class="fa-solid fa-circle-user"></i></div>
                         <div class="name">Favourite</div>
                     </div></a>
@@ -169,7 +179,16 @@
 
                 </div>
 
-                <button class="post-new-meme" id="post-a-new-meme-button" onclick="togglePostANewMeme()">
+                <button class="post-new-meme" id="post-a-new-meme-button" <?php
+                    if(isset($_SESSION['user_session'])){
+                        echo "onclick=\"togglePostANewMeme()\"";
+                    }
+                    else{
+                        echo "onclick=\"location.href='signIn'\"";
+                    }
+                ?>
+
+                        >
                     Post a new meme
                 </button>
 
@@ -251,6 +270,9 @@
                     else if($action=="top"){
                         $id = 'Top';
                     }
+                    else if($action=="last"){
+                        $id = 'Last';
+                    }
                     else{
                         $id = "Home";
                     }
@@ -262,6 +284,10 @@
             </div>
 
             <?php
+                if($memes=="null" || $memes == null){
+                    echo "Can't find any meme that matches your request.";
+                }
+                else{
                 foreach ($memes as $meme){
                     ?>
             <div class="meme-container" id="<?php echo $meme->getID() ?>">
@@ -286,7 +312,14 @@
                     <img src="<?=$meme->getPath();?>">
                 </div>
 
-                <div class="meme-footer">
+                <div class="meme-footer" <?php
+                    if(!isset($_SESSION['user_session'])){
+                        echo "style= \"display: none\"";
+                    }
+
+                ?>
+
+                >
                     <div class="meme-footer-panel-left">
                         <button class="like-button"
                         <?php if(isset($_SESSION['user_session']) && $mr->checkUserRate($meme->getID(), $user->getID()) > 0){
@@ -325,7 +358,7 @@
             </div>
 
                 <?php
-                }
+                }}
             ?>
         </div>
         <div class="panel-right">

@@ -14,6 +14,9 @@ function giveLike(){
 
     fetch('/like/'+id).then(function (){
         voteNuber.innerHTML = parseInt(voteNuber.innerHTML) + 1;
+
+        likes.disabled = true;
+        dislikes.disabled = false;
     });
 
     likes.setAttribute('style', 'color: green');
@@ -31,6 +34,9 @@ function giveDislike(){
 
     fetch('/dislike/'+id).then(function (){
         voteNuber.innerHTML = parseInt(voteNuber.innerHTML) - 1;
+
+        likes.disabled = false;
+        dislikes.disabled = true;
     });
 
     likes.setAttribute('style', 'color: white');

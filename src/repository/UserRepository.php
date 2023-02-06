@@ -23,7 +23,7 @@ class UserRepository extends Repository
             $user['login'],
             $user['password'],
             $user['email'],
-            $user['rank'],
+            $user['ID_Role'],
             $user['id']
         );
     }
@@ -45,7 +45,7 @@ class UserRepository extends Repository
             $user['login'],
             $user['password'],
             $user['email'],
-            $user['rank'],
+            $user['ID_Role'],
             $user['id']
         );
     }
@@ -55,8 +55,10 @@ class UserRepository extends Repository
             INSERT INTO public."User" (id, login, password, email) VALUES (DEFAULT, :login, :password, :email);
         ');
 
+        $hashed = password_hash($password, PASSWORD_BCRYPT);
+
         $stmt->bindParam(':login',$login, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $hashed, PDO::PARAM_STR);
         $stmt->bindParam(':email',$email, PDO::PARAM_STR);
         $stmt->execute();
     }

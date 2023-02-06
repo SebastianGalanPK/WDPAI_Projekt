@@ -8,31 +8,28 @@ require_once __DIR__.'/../models/User.php';
 
 class MemeRepository extends Repository
 {
-    public function getMeme() : array{
+    public function getMemes(PDOStatement $stmt){
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $r){
+            if($r['ID_Community']==0){
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], $this->checkRate($r['id_meme']));
+            }
+            else{
+                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], $this->checkRate($r['id_meme']));
+            }
+        }
+
+        return $array;
+    }
+
+    public function getMeme(){
         $stmt = $this->database->connect()->prepare('
             SELECT meme.id id_meme, * FROM public."Meme" meme INNER JOIN public."User" ON meme."ID_User" = "User".id Inner JOIN "Community" C on meme."ID_Community" = C.id ORDER BY meme."id" DESC;
         ');
         $stmt->execute();
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($result as $r){
-            $stmt_rate = $this->database->connect()->prepare('
-                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
-            ');
-
-            $stmt_rate->execute([$r['id_meme']]);
-            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
-
-            if($r['ID_Community']==0){
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
-            }
-            else{
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
-            }
-        }
-
-        return $array;
+        return $this->getMemes($stmt);
     }
 
     //Zwraca ID nowego mema z bazy danych.
@@ -43,6 +40,51 @@ class MemeRepository extends Repository
             INSERT INTO "Meme" ("ID_User", "ID_Community", post_date, text, file_name) 
             VALUES (?, ?, ?, ?, ?);
         ');
+
+        $dbh = $this->database->connect();
+
+        try{
+            $dbh->beginTransaction();
+
+            $user = unserialize($_SESSION['user_session']);
+
+            $stmt->execute([
+                $user->getID(),
+                $id_community,
+                $date->format('Y-m-d'),
+                $text,
+                $file
+            ]);
+
+            $lastID = (int) $this->getLastID();
+
+            $file_parts = pathinfo($file);
+            $file_name = "meme".$lastID.".".$file_parts['extension'];
+
+            $stmt = $this->database->connect()->prepare('
+                UPDATE "Meme" SET file_name = ? WHERE id=?;
+             ');
+
+            $stmt->execute([
+                $file_name,
+                $lastID
+            ]);
+        } catch(PDOException $exception){
+            die("Exception".$exception->getMessage());
+        }
+
+
+        return $file_name;
+    }
+
+    /*public function addMeme(string $text, string $file, string $id_community): string{
+        $date = new DateTime();
+
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO "Meme" ("ID_User", "ID_Community", post_date, text, file_name)
+            VALUES (?, ?, ?, ?, ?);
+        ');
+
 
         $user = unserialize($_SESSION['user_session']);
 
@@ -69,7 +111,7 @@ class MemeRepository extends Repository
         ]);
 
         return $file_name;
-    }
+    }*/
 
     public function removeMeme(int $id){
         $stmt = $this->database->connect()->prepare('
@@ -172,6 +214,10 @@ class MemeRepository extends Repository
         $stmt_rate->execute([$id_meme]);
         $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
 
+        if(!isset($result_rate['rate'])){
+            return 0;
+        }
+
         return $result_rate['rate'];
     }
 
@@ -181,52 +227,16 @@ class MemeRepository extends Repository
         ');
         $stmt->execute([$user_id]);
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($result as $r){
-            $stmt_rate = $this->database->connect()->prepare('
-                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
-            ');
-
-            $stmt_rate->execute([$r['id_meme']]);
-            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
-
-            if($r['ID_Community']==0){
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
-            }
-            else{
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
-            }
-        }
-
-        return $array;
+        return $this->getMemes($stmt);
     }
 
     public function getTopMeme() {
         $stmt = $this->database->connect()->prepare('
-            SELECT meme.id id_meme, sum(rate_value) rate, * FROM public."Meme" meme INNER JOIN public."User" ON meme."ID_User" = "User".id Inner JOIN "Community" C on meme."ID_Community" = C.id INNER JOIN "RateMeme" RM on meme.id = RM."ID_Meme" GROUP BY meme.id, "User".id, c.id, rm.id ORDER BY rate DESC;
+            SELECT "Meme".id id_meme, "Meme".file_name, "Meme".text, u.login, "Meme"."ID_Community", c.nickname, coalesce(sum(RM.rate_value), 0) rate FROM "Meme" LEFT OUTER JOIN "RateMeme" RM on "Meme".id = RM."ID_Meme" INNER JOIN "User" U on U.id = "Meme"."ID_User" INNER JOIN "Community" C on C.id = "Meme"."ID_Community" GROUP BY "Meme".id, u.login, c.nickname ORDER BY rate DESC;
         ');
         $stmt->execute();
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($result as $r){
-            $stmt_rate = $this->database->connect()->prepare('
-                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
-            ');
-
-            $stmt_rate->execute([$r['id_meme']]);
-            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
-
-            if($r['ID_Community']==0){
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
-            }
-            else{
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
-            }
-        }
-
-        return $array;
+        return $this->getMemes($stmt);
     }
 
     public function getMemeByCommunity(string $nickname){
@@ -235,25 +245,16 @@ class MemeRepository extends Repository
         ');
         $stmt->execute([$nickname]);
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->getMemes($stmt);
+    }
 
-        foreach ($result as $r){
-            $stmt_rate = $this->database->connect()->prepare('
-                SELECT sum(rate_value) rate FROM "RateMeme" WHERE "ID_Meme" = ?;
-            ');
+    public function getLastMeme(){
+        $stmt = $this->database->connect()->prepare('
+            SELECT "Meme".id id_meme, "Meme".file_name, "Meme".text, "Meme".post_date, u.login, "Meme"."ID_Community", c.nickname, coalesce(sum(RM.rate_value), 0) rate FROM "Meme" LEFT OUTER JOIN "RateMeme" RM on "Meme".id = RM."ID_Meme" INNER JOIN "User" U on U.id = "Meme"."ID_User" INNER JOIN "Community" C on C.id = "Meme"."ID_Community" GROUP BY "Meme".id, u.login, c.nickname ORDER BY "Meme".post_date DESC;
+        ');
+        $stmt->execute();
 
-            $stmt_rate->execute([$r['id_meme']]);
-            $result_rate = $stmt_rate->fetch(PDO::FETCH_ASSOC);
-
-            if($r['ID_Community']==0){
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], "", $r['login'], (int)$result_rate['rate']);
-            }
-            else{
-                $array[] = new Meme($r['id_meme'], $r['file_name'], $r['text'], $r['nickname'], $r['login'], (int)$result_rate['rate']);
-            }
-        }
-
-        return $array;
+        return $this->getMemes($stmt);
     }
 
     public function checkIfUserRateMeme(int $id, int $user_id) : int{
